@@ -54,22 +54,22 @@ const Footer: React.FC = () => {
                     © 2023 Mohith's Portfolio. All rights reserved.
                 </p>
 
-                <p style={{ margin: 0 }}>
-                    📧 Email: <a href="mailto:mohith.1si22is053@gmail.com" style={{ color: '#2563eb', textDecoration: 'none' }}>mohith.1si22is053@gmail.com</a>
-                </p>
-                <p style={{ margin: 0 }}>
-                    📞 Phone: <a href="tel:+916361113046" style={{ color: '#2563eb', textDecoration: 'none' }}>+91 6361113046</a>
-                </p>
-                <p style={{ margin: 0 }}>
-                    🔗 LinkedIn: <a
-                        href="https://www.linkedin.com/in/mohith-n-r-085a94263/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{ color: '#2563eb', textDecoration: 'none' }}
-                    >
-                        linkedin.com/in/mohith-n-r
-                    </a>
-                </p>
+                {/* <p style={{ margin: 0 }}> */}
+                    {/* 📧 Email: <a href="mailto:mohith.1si22is053@gmail.com" style={{ color: '#2563eb', textDecoration: 'none' }}>mohith.1si22is053@gmail.com</a> */}
+                {/* </p> */}
+                {/* <p style={{ margin: 0 }}> */}
+                    {/* 📞 Phone: <a href="tel:+916361113046" style={{ color: '#2563eb', textDecoration: 'none' }}>+91 6361113046</a> */}
+                {/* </p> */}
+                {/* <p style={{ margin: 0 }}> */}
+                    {/* 🔗 LinkedIn: <a */}
+                        {/* // href="https://www.linkedin.com/in/mohith-n-r-085a94263/" */}
+                        {/* // target="_blank" */}
+                        {/* // rel="noopener noreferrer" */}
+                        {/* // style={{ color: '#2563eb', textDecoration: 'none' }} */}
+                    {/* // > */}
+                        {/* linkedin.com/in/mohith-n-r */}
+                    {/* </a> */}
+                {/* </p> */}
             </footer>
         </>
     );

@@ -44,15 +44,40 @@ const Header: React.FC = () => {
                         .desktop-nav {
                             display: none !important;
                         }
-                        .mobile-nav {
+                        .mobile-nav-button {
                             display: block !important;
                         }
                     }
 
                     @media (min-width: 769px) {
-                        .mobile-nav {
+                        .mobile-nav-button {
                             display: none !important;
                         }
+                    }
+
+                    .mobile-sidebar {
+                        position: fixed;
+                        top: 0;
+                        right: 0;
+                        height: 100%;
+                        width: 250px;
+                        background: white;
+                        box-shadow: -4px 0 16px rgba(0, 0, 0, 0.1);
+                        display: flex;
+                        flex-direction: column;
+                        padding: 2rem 1rem;
+                        z-index: 2000;
+                        transition: transform 0.3s ease;
+                    }
+
+                    .overlay {
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: rgba(0, 0, 0, 0.3);
+                        z-index: 1999;
                     }
                 `}
             </style>
@@ -105,21 +130,20 @@ const Header: React.FC = () => {
                     </h1>
 
                     {/* Hamburger for Mobile */}
-                    <div className="mobile-nav">
-                        <button
-                            onClick={() => setMenuOpen(!menuOpen)}
-                            style={{
-                                background: 'none',
-                                border: 'none',
-                                cursor: 'pointer',
-                                fontSize: '1.8rem',
-                                color: '#1e40af'
-                            }}
-                            aria-label="Toggle navigation"
-                        >
-                            ☰
-                        </button>
-                    </div>
+                    <button
+                        className="mobile-nav-button"
+                        onClick={() => setMenuOpen(true)}
+                        style={{
+                            background: 'none',
+                            border: 'none',
+                            cursor: 'pointer',
+                            fontSize: '1.8rem',
+                            color: '#1e40af'
+                        }}
+                        aria-label="Open menu"
+                    >
+                        ☰
+                    </button>
 
                     {/* Desktop Nav */}
                     <nav className="desktop-nav">
@@ -172,22 +196,27 @@ const Header: React.FC = () => {
                         </ul>
                     </nav>
                 </div>
+            </header>
 
-                {/* Mobile Nav Dropdown */}
-                {menuOpen && (
-                    <div
-                        style={{
-                            marginTop: '1rem',
-                            background: 'white',
-                            borderRadius: '0.5rem',
-                            boxShadow: '0 8px 16px rgba(0, 0, 0, 0.08)',
-                            padding: '1rem',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            gap: '1rem'
-                        }}
-                        className="mobile-nav"
-                    >
+            {/* Mobile Sidebar & Overlay */}
+            {menuOpen && (
+                <>
+                    <div className="overlay" onClick={() => setMenuOpen(false)}></div>
+                    <div className="mobile-sidebar">
+                        <button
+                            onClick={() => setMenuOpen(false)}
+                            style={{
+                                background: 'none',
+                                border: 'none',
+                                fontSize: '1.5rem',
+                                alignSelf: 'flex-end',
+                                cursor: 'pointer',
+                                color: '#1e40af'
+                            }}
+                            aria-label="Close menu"
+                        >
+                            ✕
+                        </button>
                         {navLinks.map((item) => (
                             <a
                                 key={item.href}
@@ -197,30 +226,30 @@ const Header: React.FC = () => {
                                     setMenuOpen(false);
                                 }}
                                 style={{
+                                    marginTop: '1rem',
                                     color: activeSection === item.href.slice(1)
                                         ? '#2563eb'
-                                        : '#334155',
-                                    textDecoration: 'none',
+                                        : '#1e293b',
                                     fontWeight: '600',
-                                    padding: '0.5rem 1rem',
-                                    borderRadius: '6px',
+                                    textDecoration: 'none',
+                                    padding: '0.8rem 1rem',
+                                    borderRadius: '8px',
                                     background:
                                         activeSection === item.href.slice(1)
-                                            ? 'rgba(59, 130, 246, 0.08)'
+                                            ? 'rgba(59, 130, 246, 0.1)'
                                             : 'transparent',
                                     border:
                                         activeSection === item.href.slice(1)
                                             ? '1px solid rgba(59, 130, 246, 0.2)'
-                                            : '1px solid transparent',
-                                    transition: 'all 0.2s ease'
+                                            : '1px solid transparent'
                                 }}
                             >
                                 {item.label}
                             </a>
                         ))}
                     </div>
-                )}
-            </header>
+                </>
+            )}
 
             <div
                 style={{
