@@ -103,17 +103,17 @@ const About: React.FC = () => {
                         About Me
                     </h2>
 
-<p style={{
-    color: '#475569',
-    fontSize: 'clamp(1rem, 2.5vw, 1.2rem)',
-    lineHeight: '1.7',
-    textAlign: 'center',
-    fontWeight: '400',
-    maxWidth: '600px',
-    margin: '0 auto',
-    position: 'relative',
-    zIndex: 2
-}}>
+                    <p style={{
+                        color: '#475569',
+                        fontSize: 'clamp(1rem, 2.5vw, 1.2rem)',
+                        lineHeight: '1.7',
+                        textAlign: 'center',
+                        fontWeight: '400',
+                        maxWidth: '600px',
+                        margin: '0 auto',
+                        position: 'relative',
+                        zIndex: 2
+                    }}>
     I’m <span style={{
         background: 'linear-gradient(135deg, #2563eb, #3b82f6)',
         WebkitBackgroundClip: 'text',

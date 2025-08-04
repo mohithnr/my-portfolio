@@ -8,18 +8,21 @@ const Education: React.FC = () => {
             institution: "Siddaganga Institute of Technology (SIT), Tumkur",
             degree: "B.E. in Information Science & Engineering",
             year: "2022 - 2026",
+            grade:"9.08",
             type: "current"
         },
         {
             institution: "KPS PU College, Arasikere",
             degree: "Pre-University Education",
             year: "2020 - 2022",
+            grade:"96.83",
             type: "completed"
         },
         {
             institution: "Rotary High School",
             degree: "High School Education",
             year: "2020 (SSLC passed out)",
+            grade:"97.44",
             type: "completed"
         }
     ];
@@ -175,7 +178,14 @@ const Education: React.FC = () => {
                             }}>
                                 {edu.degree}
                             </div>
-                            
+                            <div style={{
+                                color: '#334155',
+                                fontWeight: '500',
+                                fontSize: '1.05rem',
+                                marginTop: '0.3rem'
+                            }}>
+                                {edu.type === 'current' ? `CGPA: ${edu.grade}` : `Percentage: ${edu.grade}%`}
+                            </div>
                             <div style={{
                                 color: '#64748b',
                                 fontWeight: '400',
