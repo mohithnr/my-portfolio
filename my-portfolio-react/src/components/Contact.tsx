@@ -136,25 +136,30 @@ const Contact: React.FC = () => {
               marginBottom: '40px',
             }}>
               {/* Email Card */}
-              <div style={{
-                background: '#112240',
-                borderRadius: '4px',
-                padding: '30px 25px',
-                boxShadow: '0 10px 30px -15px rgba(2, 12, 27, 0.7)',
-                border: '1px solid rgba(100, 255, 218, 0.1)',
-                transition: 'all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1)',
-                textAlign: 'center',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-4px)';
-                e.currentTarget.style.border = '1px solid #64ffda';
-                e.currentTarget.style.boxShadow = '4px 4px 0 0 #64ffda';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.border = '1px solid rgba(100, 255, 218, 0.1)';
-                e.currentTarget.style.boxShadow = '0 10px 30px -15px rgba(2, 12, 27, 0.7)';
-              }}
+              <a
+                href="mailto:mohith.1si22is053@gmail.com"
+                style={{
+                  background: '#112240',
+                  borderRadius: '4px',
+                  padding: '30px 25px',
+                  boxShadow: '0 10px 30px -15px rgba(2, 12, 27, 0.7)',
+                  border: '1px solid rgba(100, 255, 218, 0.1)',
+                  transition: 'all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1)',
+                  textAlign: 'center',
+                  textDecoration: 'none',
+                  display: 'block',
+                  cursor: 'pointer',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-4px)';
+                  e.currentTarget.style.border = '1px solid #64ffda';
+                  e.currentTarget.style.boxShadow = '4px 4px 0 0 #64ffda';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.border = '1px solid rgba(100, 255, 218, 0.1)';
+                  e.currentTarget.style.boxShadow = '0 10px 30px -15px rgba(2, 12, 27, 0.7)';
+                }}
               >
                 <div style={{
                   fontSize: '32px',
@@ -178,28 +183,33 @@ const Contact: React.FC = () => {
                 }}>
                   mohith.1si22is053@gmail.com
                 </p>
-              </div>
+              </a>
 
               {/* Phone Card */}
-              <div style={{
-                background: '#112240',
-                borderRadius: '4px',
-                padding: '30px 25px',
-                boxShadow: '0 10px 30px -15px rgba(2, 12, 27, 0.7)',
-                border: '1px solid rgba(100, 255, 218, 0.1)',
-                transition: 'all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1)',
-                textAlign: 'center',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-4px)';
-                e.currentTarget.style.border = '1px solid #64ffda';
-                e.currentTarget.style.boxShadow = '4px 4px 0 0 #64ffda';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.border = '1px solid rgba(100, 255, 218, 0.1)';
-                e.currentTarget.style.boxShadow = '0 10px 30px -15px rgba(2, 12, 27, 0.7)';
-              }}
+              <a
+                href="tel:+916361113046"
+                style={{
+                  background: '#112240',
+                  borderRadius: '4px',
+                  padding: '30px 25px',
+                  boxShadow: '0 10px 30px -15px rgba(2, 12, 27, 0.7)',
+                  border: '1px solid rgba(100, 255, 218, 0.1)',
+                  transition: 'all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1)',
+                  textAlign: 'center',
+                  textDecoration: 'none',
+                  display: 'block',
+                  cursor: 'pointer',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-4px)';
+                  e.currentTarget.style.border = '1px solid #64ffda';
+                  e.currentTarget.style.boxShadow = '4px 4px 0 0 #64ffda';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.border = '1px solid rgba(100, 255, 218, 0.1)';
+                  e.currentTarget.style.boxShadow = '0 10px 30px -15px rgba(2, 12, 27, 0.7)';
+                }}
               >
                 <div style={{
                   fontSize: '32px',
@@ -222,7 +232,7 @@ const Contact: React.FC = () => {
                 }}>
                   +91-6361113046
                 </p>
-              </div>
+              </a>
 
               {/* LinkedIn Card */}
               <div style={{
