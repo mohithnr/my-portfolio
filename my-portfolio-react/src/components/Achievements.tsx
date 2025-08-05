@@ -1,276 +1,193 @@
 import React from 'react';
 
+const achievements = [
+  {
+    title: "Solved over 800+ DSA problems on LeetCode with a peak rating of 1734",
+    link: "https://leetcode.com/u/Mohith_N__Raj/",
+    linkText: "LeetCode",
+    category: "Competitive Programming",
+    technologies: ["Algorithms", "Data Structures", "Problem Solving"]
+  },
+  {
+    title: "Completed an 8-week Advanced DSA Live Program by GeeksForGeeks",
+    link: "https://media.geeksforgeeks.org/courses/certificates/a882e35cf6bdeccd54b61390f2b94daa.pdf",
+    linkText: "Certificate",
+    category: "Certification",
+    technologies: ["Advanced DSA", "Live Coding", "Competitive Programming"]
+  },
+  {
+    title: "Earned Gold badge in Java and Silver badge in Python on HackerRank",
+    link: "https://www.hackerrank.com/profile/appurajshekar201",
+    linkText: "HackerRank Profile",
+    category: "Programming Skills",
+    technologies: ["Java", "Python", "Problem Solving"]
+  },
+  {
+    title: "Cleared Java (Basic) skill certification on HackerRank",
+    link: "https://www.hackerrank.com/certificates/iframe/1a1ca34e34a7",
+    linkText: "View Certificate",
+    category: "Certification",
+    technologies: ["Java", "OOP", "Basic Programming"]
+  }
+];
+
 const Achievements: React.FC = () => {
-    const [hoveredIndex, setHoveredIndex] = React.useState<number | null>(null);
+  return (
+    <>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
-    const achievementsData = [
-        {
-            title: "Solved over 800+ DSA problems on LeetCode with a peak rating of 1734",
-            link: "https://leetcode.com/u/Mohith_N__Raj/",
-            linkText: "LeetCode",
-            icon: "💻",
-            category: "Competitive Programming"
-        },
-        {
-            title: "Completed an 8-week Advanced DSA Live Program by GeeksForGeeks",
-            link: "https://media.geeksforgeeks.org/courses/certificates/a882e35cf6bdeccd54b61390f2b94daa.pdf",
-            linkText: "GeeksForGeeks",
-            icon: "📚",
-            category: "Certification"
-        },
-        {
-            title: "Earned Gold badge in Java and Silver badge in Python on HackerRank",
-            link: "https://www.hackerrank.com/profile/appurajshekar201",
-            linkText: "HackerRank",
-            icon: "🏆",
-            category: "Programming Skills"
-        },
-        {
-            title: "Cleared Java (Basic) skill certification on HackerRank",
-            link: "https://www.hackerrank.com/certificates/iframe/1a1ca34e34a7",
-            linkText: "Certificate",
-            icon: "🎯",
-            category: "Certification"
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(30px); }
+          to { opacity: 1; transform: translateY(0); }
         }
-    ];
 
-    return (
-        <>
-            <style>
-                {`
-                    @keyframes slideInDown {
-                        from {
-                            opacity: 0;
-                            transform: translateY(-30px);
-                        }
-                        to {
-                            opacity: 1;
-                            transform: translateY(0);
-                        }
-                    }
-                    
-                    @keyframes fadeInUp {
-                        from {
-                            opacity: 0;
-                            transform: translateY(20px);
-                        }
-                        to {
-                            opacity: 1;
-                            transform: translateY(0);
-                        }
-                    }
-                    
-                    @keyframes spin {
-                        0% { transform: rotate(0deg); }
-                        100% { transform: rotate(360deg); }
-                    }
-                    
-                    @keyframes glow {
-                        0%, 100% { box-shadow: 0 0 5px rgba(59, 130, 246, 0.3); }
-                        50% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.6); }
-                    }
-                    
-                    .fade-in-up {
-                        animation: fadeInUp 0.6s ease-out forwards;
-                    }
-                    
-                    .slide-in-down {
-                        animation: slideInDown 0.6s ease-out forwards;
-                    }
-                    
-                    .spin-icon {
-                        animation: spin 3s linear infinite;
-                    }
-                    
-                    .glow-effect {
-                        animation: glow 2s ease-in-out infinite;
-                    }
-                    
-                    @media (max-width: 768px) {
-                        .achievements-section {
-                            padding: 2rem 1.5rem !important;
-                            margin: 1rem auto !important;
-                        }
-                        .achievements-title {
-                            font-size: 2rem !important;
-                        }
-                        .achievement-item {
-                            padding: 1.5rem !important;
-                            font-size: 1rem !important;
-                        }
-                        .achievement-icon {
-                            font-size: 1.8rem !important;
-                        }
-                    }
-                `}
-            </style>
-            
-            <section
-                id="achievements"
-                className="achievements-section fade-in-up"
-                style={{
-                    background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.95) 100%)',
-                    backdropFilter: 'blur(10px)',
-                    borderRadius: '20px',
-                    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(226, 232, 240, 0.8)',
-                    padding: '3.5rem 2.5rem',
-                    margin: '2rem auto',
-                    maxWidth: '800px',
-                    position: 'relative',
-                    overflow: 'hidden',
-                    border: '1px solid rgba(226, 232, 240, 0.6)',
-                    boxSizing: 'border-box'
-                }}
-            >
-                {/* Decorative floating element */}
-                <div style={{
-                    position: 'absolute',
-                    top: '-35%',
-                    right: '-35%',
-                    width: '150%',
-                    height: '150%',
-                    background: 'radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, transparent 70%)',
-                    borderRadius: '50%',
-                    zIndex: 1,
-                    animation: 'slideInDown 6s ease-in-out infinite alternate'
-                }}></div>
+        .fade-in-up {
+          animation: fadeInUp 0.6s ease-out forwards;
+        }
 
-                <h2
-                    className="achievements-title"
-                    style={{
-                        background: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 50%, #1e40af 100%)',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                        fontSize: 'clamp(2.2rem, 5vw, 3rem)',
-                        fontWeight: '700',
-                        marginBottom: '2.5rem',
-                        textAlign: 'center',
-                        letterSpacing: '-0.01em',
-                        position: 'relative',
-                        zIndex: 2
-                    }}
-                >
-                    Achievements
-                </h2>
+        .achievements-container {
+          max-width: 1000px;
+          margin: 0 auto;
+          padding: 100px 150px;
+          background: #0a192f;
+          color: #ccd6f6;
+          font-family: 'Inter', sans-serif;
+        }
 
-                <ul style={{ 
-                    padding: 0, 
-                    margin: 0, 
-                    listStyle: "none",
-                    position: 'relative',
-                    zIndex: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: '1.5rem'
-                }}>
-                    {achievementsData.map((achievement, index) => (
-                        <li
-                            key={index}
-                            className="achievement-item slide-in-down"
-                            style={{
-                                background: hoveredIndex === index 
-                                    ? 'linear-gradient(135deg, rgba(59, 130, 246, 0.12) 0%, rgba(147, 197, 253, 0.08) 100%)'
-                                    : 'linear-gradient(135deg, rgba(59, 130, 246, 0.08) 0%, rgba(147, 197, 253, 0.05) 100%)',
-                                borderRadius: '16px',
-                                padding: '2rem 1.5rem',
-                                fontSize: '1.1rem',
-                                boxShadow: hoveredIndex === index
-                                    ? '0 15px 35px rgba(59, 130, 246, 0.15), 0 0 0 1px rgba(59, 130, 246, 0.25)'
-                                    : '0 8px 25px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(226, 232, 240, 0.5)',
-                                textAlign: 'center',
-                                transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                                transform: hoveredIndex === index ? 'translateY(-6px) scale(1.02)' : 'translateY(0) scale(1)',
-                                border: '1px solid rgba(59, 130, 246, 0.15)',
-                                cursor: 'pointer',
-                                animationDelay: `${index * 0.15}s`,
-                                animationFillMode: 'both',
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'center',
-                                gap: '1rem'
-                            }}
-                            onMouseEnter={() => setHoveredIndex(index)}
-                            onMouseLeave={() => setHoveredIndex(null)}
-                        >
-                            {/* Achievement Header */}
-                            <div style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '1rem',
-                                marginBottom: '0.5rem'
-                            }}>
-                                <span 
-                                    className={`achievement-icon ${hoveredIndex === index ? 'spin-icon' : ''}`}
-                                    style={{
-                                        fontSize: '2.2rem',
-                                        transition: 'transform 0.3s ease'
-                                    }}
-                                >
-                                    {achievement.icon}
-                                </span>
-                                <span style={{
-                                    background: 'linear-gradient(135deg, #2563eb, #3b82f6)',
-                                    color: 'white',
-                                    padding: '0.3rem 0.8rem',
-                                    borderRadius: '12px',
-                                    fontSize: '0.8rem',
-                                    fontWeight: '600',
-                                    textTransform: 'uppercase',
-                                    letterSpacing: '0.5px'
-                                }}>
-                                    {achievement.category}
-                                </span>
-                            </div>
+        @media (max-width: 768px) {
+          .achievements-container {
+            padding: 100px 25px;
+          }
+        }
 
-                            {/* Achievement Title */}
-                            <span style={{
-                                fontWeight: '600',
-                                color: '#374151',
-                                fontSize: '1.1rem',
-                                lineHeight: '1.6',
-                                marginBottom: '1rem',
-                                maxWidth: '600px'
-                            }}>
-                                {achievement.title}
-                            </span>
+        .section-header {
+          display: flex;
+          align-items: center;
+          margin-bottom: 50px;
+          white-space: nowrap;
+        }
 
-                            {/* Achievement Link */}
-                            <a 
-                                href={achievement.link} 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                className={hoveredIndex === index ? 'glow-effect' : ''}
-                                style={{
-                                    background: 'linear-gradient(135deg, #2563eb, #3b82f6)',
-                                    color: 'white',
-                                    padding: '0.7rem 1.5rem',
-                                    borderRadius: '10px',
-                                    textDecoration: 'none',
-                                    fontWeight: '600',
-                                    fontSize: '0.95rem',
-                                    transition: 'all 0.3s ease',
-                                    display: 'inline-flex',
-                                    alignItems: 'center',
-                                    gap: '0.5rem',
-                                    border: '2px solid transparent'
-                                }}
-                                onMouseEnter={(e) => {
-                                    e.currentTarget.style.transform = 'translateY(-2px)';
-                                    e.currentTarget.style.boxShadow = '0 8px 25px rgba(59, 130, 246, 0.4)';
-                                }}
-                                onMouseLeave={(e) => {
-                                    e.currentTarget.style.transform = 'translateY(0)';
-                                    e.currentTarget.style.boxShadow = 'none';
-                                }}
-                            >
-                                🔗 View {achievement.linkText}
-                            </a>
-                        </li>
-                    ))}
-                </ul>
-            </section>
-        </>
-    );
+        .section-header h2 {
+          color: #64ffda;
+          font-family: 'JetBrains Mono', monospace;
+          font-size: clamp(14px, 5vw, 20px);
+          font-weight: 400;
+          margin: 0 10px 0 0;
+        }
+
+        .section-header h3 {
+          color: #ccd6f6;
+          font-size: clamp(26px, 5vw, 32px);
+          font-weight: 600;
+          font-family: 'Inter', sans-serif;
+          margin: 0 20px 0 0;
+        }
+
+        .section-header .line {
+          height: 1px;
+          background-color: #233554;
+          width: 300px;
+          position: relative;
+          top: 5px;
+        }
+
+        .achievement-card {
+          background: #112240;
+          border-radius: 12px;
+          padding: 1.5rem;
+          margin-bottom: 2rem;
+          box-shadow: 0 20px 30px rgba(2, 12, 27, 0.7);
+          transition: transform 0.3s ease;
+        }
+
+        .achievement-card:hover {
+          transform: translateY(-5px);
+        }
+
+        .achievement-category {
+          color: #64ffda;
+          font-size: 0.95rem;
+          font-weight: 500;
+          margin-bottom: 0.5rem;
+        }
+
+        .achievement-title {
+          font-size: 1.2rem;
+          font-weight: 600;
+          margin-bottom: 0.75rem;
+        }
+
+        .achievement-link {
+          color: #2563eb;
+          text-decoration: none;
+          font-weight: 600;
+          font-size: 0.9rem;
+          transition: color 0.25s ease;
+        }
+
+        .achievement-link:hover {
+          color: #64ffda;
+        }
+
+        .tech-stack {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.5rem;
+          margin-top: 1rem;
+        }
+
+        .tech-tag {
+          display: inline-block;
+          padding: 0.25rem 0.5rem;
+          background: rgba(100, 255, 218, 0.1);
+          color: #64ffda;
+          border-radius: 3px;
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 0.75rem;
+          font-weight: 400;
+          transition: all 0.25s ease;
+        }
+
+        .tech-tag:hover {
+          background: rgba(100, 255, 218, 0.2);
+          transform: translateY(-2px);
+        }
+      `}</style>
+
+      <section id="achievements" className="fade-in-up" style={{ background: '#0a192f', minHeight: '100vh' }}>
+        <div className="achievements-container">
+          {/* Section Header */}
+          <div className="section-header">
+            <h2>05.</h2>
+            <h3>Achievements & Certifications</h3>
+            <div className="line"></div>
+          </div>
+
+          {/* Cards */}
+          {achievements.map((item, index) => (
+            <div className="achievement-card" key={index}>
+              <div className="achievement-category">{item.category}</div>
+              <div className="achievement-title">{item.title}</div>
+              <a
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="achievement-link"
+              >
+                {item.linkText}
+              </a>
+              <div className="tech-stack">
+                {item.technologies.map((tech, idx) => (
+                  <span className="tech-tag" key={idx}>{tech}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+    </>
+  );
 };
 
 export default Achievements;

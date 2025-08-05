@@ -5,6 +5,20 @@ const Footer: React.FC = () => {
         <>
             <style>
                 {`
+                    :root {
+                        --navy: #0a192f;
+                        --light-navy: #112240;
+                        --lightest-navy: #233554;
+                        --slate: #8892b0;
+                        --light-slate: #a8b2d1;
+                        --lightest-slate: #ccd6f6;
+                        --white: #e6f1ff;
+                        --green: #64ffda;
+                        --font-mono: 'JetBrains Mono', monospace;
+                        --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
+                        --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+                    }
+
                     @keyframes slideUp {
                         from {
                             opacity: 0;
@@ -16,60 +30,47 @@ const Footer: React.FC = () => {
                         }
                     }
 
-                    .slide-up {
+                    .footer-container {
                         animation: slideUp 0.6s ease-out forwards;
+                        background: rgba(10, 25, 47, 0.95);
+                        backdrop-filter: blur(16px);
+                        border-top: 1px solid rgba(226, 232, 240, 0.1);
+                        box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.05);
+                        padding: 2rem;
+                        margin-top: 4rem;
+                        text-align: center;
+                        font-family: var(--font-mono);
+                        font-size: 0.9rem;
+                        color: var(--slate);
+                        line-height: 1.8;
                     }
 
-                    a:hover {
+                    .footer-highlight {
+                        background: linear-gradient(135deg, #64ffda 0%, #1de9b6 100%);
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                        font-weight: 600;
+                        letter-spacing: 0.03em;
+                        font-size: 1rem;
+                        margin-bottom: 1rem;
+                        display: inline-block;
+                    }
+
+                    .footer-link {
+                        color: var(--green);
+                        text-decoration: none;
+                        transition: var(--transition);
+                    }
+
+                    .footer-link:hover {
                         text-decoration: underline;
+                        color: var(--lightest-slate);
                     }
                 `}
             </style>
 
-            <footer
-                className="slide-up"
-                style={{
-                    background: 'rgba(255, 255, 255, 0.85)',
-                    backdropFilter: 'blur(16px)',
-                    borderTop: '1px solid rgba(226, 232, 240, 0.3)',
-                    boxShadow: '0 -2px 12px rgba(0, 0, 0, 0.05)',
-                    padding: '2rem',
-                    marginTop: '4rem',
-                    textAlign: 'center',
-                    fontSize: '1rem',
-                    color: '#475569',
-                    lineHeight: '1.8'
-                }}
-            >
-                <p
-                    style={{
-                        margin: '0 0 1rem',
-                        background: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 50%, #1e40af 100%)',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                        fontWeight: '600',
-                        letterSpacing: '0.03em'
-                    }}
-                >
-                    © 2023 Mohith's Portfolio. All rights reserved.
-                </p>
-
-                {/* <p style={{ margin: 0 }}> */}
-                    {/* 📧 Email: <a href="mailto:mohith.1si22is053@gmail.com" style={{ color: '#2563eb', textDecoration: 'none' }}>mohith.1si22is053@gmail.com</a> */}
-                {/* </p> */}
-                {/* <p style={{ margin: 0 }}> */}
-                    {/* 📞 Phone: <a href="tel:+916361113046" style={{ color: '#2563eb', textDecoration: 'none' }}>+91 6361113046</a> */}
-                {/* </p> */}
-                {/* <p style={{ margin: 0 }}> */}
-                    {/* 🔗 LinkedIn: <a */}
-                        {/* // href="https://www.linkedin.com/in/mohith-n-r-085a94263/" */}
-                        {/* // target="_blank" */}
-                        {/* // rel="noopener noreferrer" */}
-                        {/* // style={{ color: '#2563eb', textDecoration: 'none' }} */}
-                    {/* // > */}
-                        {/* linkedin.com/in/mohith-n-r */}
-                    {/* </a> */}
-                {/* </p> */}
+             <footer className="footer-container">
+                <p className="footer-highlight">© 2023 Mohith's Portfolio. All rights reserved.</p>
             </footer>
         </>
     );

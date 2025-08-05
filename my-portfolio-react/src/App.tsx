@@ -12,15 +12,19 @@ import './styles/main.css';
 
 function App() {
   return (
-    <div>
+    <div style={{ 
+      background: '#0a192f', 
+      minHeight: '100vh',
+      margin: 0,
+      padding: 0 
+    }}>
       <Header />
       <About />
       <Education />
       <Skills />
-      {/* <Experience /> */}
       <Projects />
       <Achievements/>
-      {<Contact />}
+      <Contact />
       <Footer />
     </div>
   );

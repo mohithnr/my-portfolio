@@ -7,16 +7,12 @@ const About: React.FC = () => {
         <>
             <style>
                 {`
-                    @keyframes float {
-                        0%, 100% { transform: translateY(0px) rotate(0deg); }
-                        33% { transform: translateY(-8px) rotate(1deg); }
-                        66% { transform: translateY(4px) rotate(-1deg); }
-                    }
+                    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
                     @keyframes fadeInUp {
                         from {
                             opacity: 0;
-                            transform: translateY(20px);
+                            transform: translateY(30px);
                         }
                         to {
                             opacity: 1;
@@ -24,8 +20,75 @@ const About: React.FC = () => {
                         }
                     }
 
+                    @keyframes slideInLeft {
+                        from {
+                            opacity: 0;
+                            transform: translateX(-30px);
+                        }
+                        to {
+                            opacity: 1;
+                            transform: translateX(0);
+                        }
+                    }
+
                     .fade-in-up {
                         animation: fadeInUp 0.6s ease-out forwards;
+                    }
+
+                    .slide-in-left {
+                        animation: slideInLeft 0.6s ease-out forwards;
+                    }
+
+                    .tech-tag {
+                        display: inline-block;
+                        padding: 0.25rem 0.5rem;
+                        margin: 0.25rem;
+                        background: rgba(100, 255, 218, 0.1);
+                        color: #64ffda;
+                        border-radius: 3px;
+                        font-family: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', Consolas, 'Courier New', monospace;
+                        font-size: 0.75rem;
+                        font-weight: 400;
+                        transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+                    }
+
+                    .tech-tag:hover {
+                        background: rgba(100, 255, 218, 0.2);
+                        transform: translateY(-2px);
+                    }
+
+                    .about-container {
+                        max-width: 1000px;
+                        margin: 0 auto;
+                        padding: 0 150px;
+                        width: 100%;
+                    }
+
+                    .about-grid {
+                        display: grid;
+                        grid-template-columns: 3fr 2fr;
+                        gap: 50px;
+                        align-items: start;
+                    }
+
+                    .profile-image-container {
+                        position: relative;
+                        max-width: 300px;
+                    }
+
+                    @media (max-width: 768px) {
+                        .about-container {
+                            padding: 0 25px;
+                        }
+
+                        .about-grid {
+                            display: block;
+                        }
+
+                        .profile-image-container {
+                            margin: 50px auto 0;
+                            width: 70%;
+                        }
                     }
                 `}
             </style>
@@ -33,115 +96,210 @@ const About: React.FC = () => {
             <section
                 id="about"
                 style={{
-                    background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 250, 252, 0.95) 100%)',
-                    backdropFilter: 'blur(10px)',
-                    borderRadius: '20px',
-                    boxShadow: isHovered
-                        ? '0 20px 40px rgba(59, 130, 246, 0.15), 0 0 0 1px rgba(59, 130, 246, 0.2)'
-                        : '0 10px 30px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(226, 232, 240, 0.8)',
-                    padding: '3rem 2rem',
-                    margin: '3rem auto',
-                    maxWidth: '850px',
-                    position: 'relative',
-                    overflow: 'hidden',
-                    border: '1px solid rgba(226, 232, 240, 0.6)',
-                    transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-                    transform: isHovered ? 'translateY(-6px)' : 'translateY(0)',
+                    background: '#0a192f',
+                    padding: '100px 0',
+                    minHeight: '100vh',
+                    display: 'flex',
+                    alignItems: 'center',
                 }}
-                onMouseEnter={() => setIsHovered(true)}
-                onMouseLeave={() => setIsHovered(false)}
                 className="fade-in-up"
             >
-                {/* Decorative glow */}
-                <div style={{
-                    position: 'absolute',
-                    top: '-30%',
-                    right: '-30%',
-                    width: '150%',
-                    height: '150%',
-                    background: 'radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%)',
-                    borderRadius: '50%',
-                    animation: 'float 5s ease-in-out infinite',
-                    zIndex: 1
-                }}></div>
-
-                {/* Content container */}
-                <div style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    gap: '2rem',
-                    zIndex: 2,
-                    position: 'relative',
-                }}>
-                    {/* Profile Image */}
-                    <img
-                        src="/images/mohith.jpeg"
-                        alt="Mohith Profile"
-                        style={{
-                            width: '130px',
-                            height: '130px',
-                            borderRadius: '50%',
-                            objectFit: 'cover',
-                            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
-                            transition: 'transform 0.3s ease',
-                        }}
-                        onMouseEnter={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-                        onMouseLeave={(e) => e.currentTarget.style.transform = 'scale(1)'}
-                    />
-
-                    <h2 style={{
-                        background: 'linear-gradient(135deg, #2563eb 0%, #1d4ed8 50%, #1e40af 100%)',
-                        WebkitBackgroundClip: 'text',
-                        WebkitTextFillColor: 'transparent',
-                        fontSize: 'clamp(2.2rem, 5vw, 3rem)',
-                        fontWeight: '700',
-                        textAlign: 'center',
-                        letterSpacing: '-0.01em',
-                        margin: 0
+                <div className="about-container">
+                    {/* Section Header */}
+                    <div className="slide-in-left" style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        marginBottom: '50px',
+                        whiteSpace: 'nowrap',
                     }}>
-                        About Me
-                    </h2>
+                        <h2 style={{
+                            color: '#64ffda',
+                            fontFamily: "'JetBrains Mono', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', Consolas, 'Courier New', monospace",
+                            fontSize: 'clamp(14px, 5vw, 20px)',
+                            fontWeight: '400',
+                            margin: 0,
+                            marginRight: '10px',
+                        }}>
+                            01.
+                        </h2>
+                        <h3 style={{
+                            color: '#ccd6f6',
+                            fontSize: 'clamp(26px, 5vw, 32px)',
+                            fontWeight: '600',
+                            fontFamily: "'Inter', 'San Francisco', 'SF Pro Display', -apple-system, system-ui, sans-serif",
+                            margin: 0,
+                            marginRight: '20px',
+                        }}>
+                            About Me
+                        </h3>
+                        <div style={{
+                            height: '1px',
+                            backgroundColor: '#233554',
+                            width: '300px',
+                            position: 'relative',
+                            top: '5px',
+                        }}></div>
+                    </div>
 
-                    <p style={{
-                        color: '#475569',
-                        fontSize: 'clamp(1rem, 2.5vw, 1.2rem)',
-                        lineHeight: '1.7',
-                        textAlign: 'center',
-                        fontWeight: '400',
-                        maxWidth: '600px',
-                        margin: '0 auto',
-                        position: 'relative',
-                        zIndex: 2
-                    }}>
-    I’m <span style={{
-        background: 'linear-gradient(135deg, #2563eb, #3b82f6)',
-        WebkitBackgroundClip: 'text',
-        WebkitTextFillColor: 'transparent',
-        fontWeight: '600'
-    }}>Mohith N R</span>, an Information Science Engineering student at 
-    <span style={{
-        background: 'linear-gradient(135deg, #2563eb, #3b82f6)',
-        WebkitBackgroundClip: 'text',
-        WebkitTextFillColor: 'transparent',
-        fontWeight: '600'
-    }}> Siddaganga Institute of Technology</span>.
+                    {/* Content Container */}
+                    <div className="about-grid">
+                        {/* Text Content */}
+                        <div>
+                            <div style={{
+                                color: '#8892b0',
+                                fontSize: '20px',
+                                lineHeight: '1.6',
+                                fontFamily: "'Inter', 'San Francisco', 'SF Pro Display', -apple-system, system-ui, sans-serif",
+                                fontWeight: '400',
+                            }}>
+                                <p style={{ margin: '0 0 15px 0' }}>
+                                    Hello! I'm <span style={{ color: '#64ffda', fontWeight: '500' }}>Mohith N R</span>, an Information Science Engineering student at{' '}
+                                    <span style={{ color: '#64ffda', fontWeight: '500' }}>Siddaganga Institute of Technology</span>.
+                                </p>
 
-    <br /><br />
+                                <p style={{ margin: '0 0 15px 0' }}>
+                                    I enjoy building full-stack web applications that solve real-world problems. 
+                                    My focus is on creating digital experiences that are not only functional but also 
+                                    intuitive and accessible.
+                                </p>
 
-    I enjoy building full-stack web applications using technologies like 
-    <span style={{
-        background: 'linear-gradient(135deg, #2563eb, #3b82f6)',
-        WebkitBackgroundClip: 'text',
-        WebkitTextFillColor: 'transparent',
-        fontWeight: '600'
-    }}> React, Node.js, Express, MongoDB, and Tailwind CSS</span>.
+                                <p style={{ margin: '0 0 15px 0' }}>
+                                    I'm passionate about learning new technologies, contributing to open-source projects, 
+                                    and continuously improving my craft through hands-on experience and collaboration.
+                                </p>
 
-    <br /><br />
+                                <p style={{ margin: '0 0 20px 0' }}>
+                                    Here are some technologies I've been working with recently:
+                                </p>
+                            </div>
 
-    I'm passionate about solving problems, creating useful tools, and continuously learning through real-world projects and collaboration.
-</p>
+                            {/* Technology List */}
+                            <ul style={{
+                                display: 'grid',
+                                gridTemplateColumns: 'repeat(2, minmax(140px, 200px))',
+                                gap: '0px 10px',
+                                padding: 0,
+                                margin: '20px 0 0 0',
+                                overflow: 'hidden',
+                                listStyle: 'none',
+                            }}>
+                                {[
+                                    'JavaScript (ES6+)',
+                                    'TypeScript',
+                                    'React',
+                                    'Node.js',
+                                    'Express.js',
+                                    'MongoDB'
+                                ].map((tech, index) => (
+                                    <li key={index} style={{
+                                        position: 'relative',
+                                        marginBottom: '10px',
+                                        paddingLeft: '20px',
+                                        fontFamily: "'JetBrains Mono', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', Consolas, 'Courier New', monospace",
+                                        fontSize: '13px',
+                                        color: '#8892b0',
+                                    }}>
+                                        <span style={{
+                                            position: 'absolute',
+                                            left: '0px',
+                                            color: '#64ffda',
+                                            fontSize: '14px',
+                                            lineHeight: '12px',
+                                        }}>▹</span>
+                                        {tech}
+                                    </li>
+                                ))}
+                            </ul>
 
+                            {/* Resume Button */}
+                            <a
+                                href="/resume.pdf"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{
+                                    display: 'inline-block',
+                                    marginTop: '50px',
+                                    padding: '1.25rem 1.75rem',
+                                    background: 'transparent',
+                                    color: '#64ffda',
+                                    border: '1px solid #64ffda',
+                                    borderRadius: '4px',
+                                    fontFamily: "'JetBrains Mono', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', Consolas, 'Courier New', monospace",
+                                    fontSize: '14px',
+                                    fontWeight: '400',
+                                    textDecoration: 'none',
+                                    transition: 'all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1)',
+                                    cursor: 'pointer',
+                                }}
+                                onMouseEnter={(e) => {
+                                    e.currentTarget.style.background = 'rgba(100, 255, 218, 0.1)';
+                                    e.currentTarget.style.transform = 'translate(-4px, -4px)';
+                                    e.currentTarget.style.boxShadow = '4px 4px 0 0 #64ffda';
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.currentTarget.style.background = 'transparent';
+                                    e.currentTarget.style.transform = 'translate(0, 0)';
+                                    e.currentTarget.style.boxShadow = 'none';
+                                }}
+                            >
+                                Check out my resume!
+                            </a>
+                        </div>
+
+                        {/* Profile Image */}
+                        <div className="profile-image-container">
+                            <div 
+                                style={{
+                                    position: 'relative',
+                                    width: '100%',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                }}
+                                onMouseEnter={() => setIsHovered(true)}
+                                onMouseLeave={() => setIsHovered(false)}
+                            >
+                                {/* Circular border outline */}
+                                <div
+                                    style={{
+                                        position: 'absolute',
+                                        width: '280px',
+                                        height: '280px',
+                                        borderRadius: '50%',
+                                        border: '3px solid #64ffda',
+                                        transition: 'all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1)',
+                                        transform: isHovered ? 'translate(-8px, -8px)' : 'translate(8px, 8px)',
+                                        zIndex: 1,
+                                    }}
+                                />
+                                
+                                {/* Image container */}
+                                <div 
+                                    style={{
+                                        position: 'relative',
+                                        width: '280px',
+                                        height: '280px',
+                                        borderRadius: '50%',
+                                        overflow: 'hidden',
+                                        transition: 'all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1)',
+                                        transform: isHovered ? 'translate(-4px, -4px)' : 'translate(0, 0)',
+                                        zIndex: 2,
+                                    }}
+                                >
+                                    <img
+                                        src="/images/mohith.jpeg"
+                                        alt="Mohith Profile"
+                                        style={{
+                                            width: '100%',
+                                            height: '100%',
+                                            objectFit: 'cover',
+                                            transition: 'all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1)',
+                                        }}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
         </>
