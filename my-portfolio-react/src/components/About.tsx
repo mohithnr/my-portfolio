@@ -64,16 +64,27 @@ const About: React.FC = () => {
                         width: 100%;
                     }
 
-                    .about-grid {
-                        display: grid;
-                        grid-template-columns: 3fr 2fr;
-                        gap: 50px;
-                        align-items: start;
+                    .about-content {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        text-align: center;
                     }
 
                     .profile-image-container {
                         position: relative;
-                        max-width: 300px;
+                        margin-bottom: 50px;
+                    }
+
+                    .text-content {
+                        max-width: 700px;
+                        text-align: left;
+                    }
+
+                    /* Responsive image sizing */
+                    .profile-image-size {
+                        width: 280px;
+                        height: 280px;
                     }
 
                     @media (max-width: 768px) {
@@ -81,13 +92,16 @@ const About: React.FC = () => {
                             padding: 0 25px;
                         }
 
-                        .about-grid {
-                            display: block;
+                        .profile-image-size {
+                            width: 220px;
+                            height: 220px;
                         }
+                    }
 
-                        .profile-image-container {
-                            margin: 50px auto 0;
-                            width: 70%;
+                    @media (max-width: 480px) {
+                        .profile-image-size {
+                            width: 180px;
+                            height: 180px;
                         }
                     }
                 `}
@@ -142,9 +156,60 @@ const About: React.FC = () => {
                     </div>
 
                     {/* Content Container */}
-                    <div className="about-grid">
+                    <div className="about-content">
+                        {/* Profile Image */}
+                        <div className="profile-image-container">
+                            <div 
+                                style={{
+                                    position: 'relative',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                }}
+                                onMouseEnter={() => setIsHovered(true)}
+                                onMouseLeave={() => setIsHovered(false)}
+                            >
+                                {/* Circular border outline - simplified animation for better mobile experience */}
+                                <div
+                                    className="profile-image-size"
+                                    style={{
+                                        position: 'absolute',
+                                        borderRadius: '50%',
+                                        border: '3px solid #64ffda',
+                                        transition: 'all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1)',
+                                        transform: isHovered ? 'translate(-4px, -4px)' : 'translate(4px, 4px)',
+                                        zIndex: 1,
+                                    }}
+                                />
+                                
+                                {/* Image container */}
+                                <div 
+                                    className="profile-image-size"
+                                    style={{
+                                        position: 'relative',
+                                        borderRadius: '50%',
+                                        overflow: 'hidden',
+                                        transition: 'all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1)',
+                                        transform: isHovered ? 'translate(-2px, -2px)' : 'translate(0, 0)',
+                                        zIndex: 2,
+                                    }}
+                                >
+                                    <img
+                                        src="/images/mohith.jpeg"
+                                        alt="Mohith Profile"
+                                        style={{
+                                            width: '100%',
+                                            height: '100%',
+                                            objectFit: 'cover',
+                                            transition: 'all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1)',
+                                        }}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
                         {/* Text Content */}
-                        <div>
+                        <div className="text-content">
                             <div style={{
                                 color: '#8892b0',
                                 fontSize: '20px',
@@ -212,91 +277,39 @@ const About: React.FC = () => {
                             </ul>
 
                             {/* Resume Button */}
-                            <a
-                                href="/resume.pdf"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                style={{
-                                    display: 'inline-block',
-                                    marginTop: '50px',
-                                    padding: '1.25rem 1.75rem',
-                                    background: 'transparent',
-                                    color: '#64ffda',
-                                    border: '1px solid #64ffda',
-                                    borderRadius: '4px',
-                                    fontFamily: "'JetBrains Mono', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', Consolas, 'Courier New', monospace",
-                                    fontSize: '14px',
-                                    fontWeight: '400',
-                                    textDecoration: 'none',
-                                    transition: 'all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1)',
-                                    cursor: 'pointer',
-                                }}
-                                onMouseEnter={(e) => {
-                                    e.currentTarget.style.background = 'rgba(100, 255, 218, 0.1)';
-                                    e.currentTarget.style.transform = 'translate(-4px, -4px)';
-                                    e.currentTarget.style.boxShadow = '4px 4px 0 0 #64ffda';
-                                }}
-                                onMouseLeave={(e) => {
-                                    e.currentTarget.style.background = 'transparent';
-                                    e.currentTarget.style.transform = 'translate(0, 0)';
-                                    e.currentTarget.style.boxShadow = 'none';
-                                }}
-                            >
-                                Check out my resume!
-                            </a>
-                        </div>
-
-                        {/* Profile Image */}
-                        <div className="profile-image-container">
-                            <div 
-                                style={{
-                                    position: 'relative',
-                                    width: '100%',
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                    alignItems: 'center',
-                                }}
-                                onMouseEnter={() => setIsHovered(true)}
-                                onMouseLeave={() => setIsHovered(false)}
-                            >
-                                {/* Circular border outline */}
-                                <div
+                            <div style={{ textAlign: 'center' }}>
+                                <a
+                                    href="/resume.pdf"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     style={{
-                                        position: 'absolute',
-                                        width: '280px',
-                                        height: '280px',
-                                        borderRadius: '50%',
-                                        border: '3px solid #64ffda',
+                                        display: 'inline-block',
+                                        marginTop: '50px',
+                                        padding: '1.25rem 1.75rem',
+                                        background: 'transparent',
+                                        color: '#64ffda',
+                                        border: '1px solid #64ffda',
+                                        borderRadius: '4px',
+                                        fontFamily: "'JetBrains Mono', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', Consolas, 'Courier New', monospace",
+                                        fontSize: '14px',
+                                        fontWeight: '400',
+                                        textDecoration: 'none',
                                         transition: 'all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1)',
-                                        transform: isHovered ? 'translate(-8px, -8px)' : 'translate(8px, 8px)',
-                                        zIndex: 1,
+                                        cursor: 'pointer',
                                     }}
-                                />
-                                
-                                {/* Image container */}
-                                <div 
-                                    style={{
-                                        position: 'relative',
-                                        width: '280px',
-                                        height: '280px',
-                                        borderRadius: '50%',
-                                        overflow: 'hidden',
-                                        transition: 'all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1)',
-                                        transform: isHovered ? 'translate(-4px, -4px)' : 'translate(0, 0)',
-                                        zIndex: 2,
+                                    onMouseEnter={(e) => {
+                                        e.currentTarget.style.background = 'rgba(100, 255, 218, 0.1)';
+                                        e.currentTarget.style.transform = 'translate(-4px, -4px)';
+                                        e.currentTarget.style.boxShadow = '4px 4px 0 0 #64ffda';
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.currentTarget.style.background = 'transparent';
+                                        e.currentTarget.style.transform = 'translate(0, 0)';
+                                        e.currentTarget.style.boxShadow = 'none';
                                     }}
                                 >
-                                    <img
-                                        src="/images/mohith.jpeg"
-                                        alt="Mohith Profile"
-                                        style={{
-                                            width: '100%',
-                                            height: '100%',
-                                            objectFit: 'cover',
-                                            transition: 'all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1)',
-                                        }}
-                                    />
-                                </div>
+                                    Check out my resume!
+                                </a>
                             </div>
                         </div>
                     </div>
