@@ -79,7 +79,7 @@ const Contact: React.FC = () => {
               margin: 0,
               marginRight: '10px',
             }}>
-              04.
+              06.
             </h2>
             <h3 style={{
               color: '#ccd6f6',

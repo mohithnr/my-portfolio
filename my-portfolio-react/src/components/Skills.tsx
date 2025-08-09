@@ -21,7 +21,7 @@ const skillsData = [
   },
   {
     category: 'CS Fundamentals',
-    skills: ['Data Structures and Algorithms', 'OOPS', 'OS', 'DBMS'],
+    skills: ['Data Structures and Algorithms', 'OOPS', 'Operating Systems', 'DBMS','Computer Networks '],
     icon: '📚',
   },
   {

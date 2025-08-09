@@ -28,6 +28,13 @@ const achievements = [
     linkText: "View Certificate",
     category: "Certification",
     technologies: ["Java", "OOP", "Basic Programming"]
+  },
+  {
+    title: "Cleared SQL (Basic) skill certification on HackerRank",
+    link: "https://www.hackerrank.com/certificates/iframe/e473682d2967",
+    linkText: "View Certificate",
+    category: "Certification",
+    technologies: ["SQL"]
   }
 ];
 

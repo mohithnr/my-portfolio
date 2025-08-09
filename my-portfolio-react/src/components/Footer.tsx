@@ -70,7 +70,7 @@ const Footer: React.FC = () => {
             </style>
 
              <footer className="footer-container">
-                <p className="footer-highlight">© 2023 Mohith's Portfolio. All rights reserved.</p>
+                <p className="footer-highlight">© 2025 Mohith's Portfolio. All rights reserved.</p>
             </footer>
         </>
     );
