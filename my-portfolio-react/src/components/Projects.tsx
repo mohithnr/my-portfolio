@@ -34,6 +34,7 @@ const projectsData: Project[] = [
       'Integrated Razorpay for secure online payments and Generative AI for AI-driven drug suggestions based on symptoms and history.',
     ],
   },
+
   {
     title: 'Medical Report Analyzer',
     techStack: ['TailwindCSS', 'ReactJS', 'Node.js', 'Express.js', 'Servam AI', 'OCR', 'PDFKit'],
@@ -46,6 +47,36 @@ const projectsData: Project[] = [
       'Integrated Servam AI for converting diagnostic text into voice, enhancing accessibility.',
     ],
   },
+  {
+  title: 'Gosiri – Smart Dairy Management System',
+  techStack: [
+    'Next.js 14',
+    'TypeScript',
+    'TailwindCSS',
+    'Recharts',
+    'Node.js',
+    'Express.js',
+    'MongoDB',
+    'Mongoose',
+    'JWT',
+    'bcryptjs'
+  ],
+  github: 'https://github.com/mohithnr/gosiri',
+  live: null,
+  icon: '🐄',
+  features: [
+    'Authentication: Secure JWT-based login/registration for farmers.',
+    'Dashboard: Overview of daily milk collection, sales, expenses, and profit/loss.',
+    'Cow Management: Add and manage individual cows with detailed records.',
+    'AI Chatbot: Multi-language chatbot to assist farmers regarding dairy farming.',
+    'Milk Records: Track morning and evening milk production per cow.',
+    'Sales Tracking: Record milk sales with automatic calculations.',
+    'Expense Management: Log farm expenses with notes.',
+    'Breeding Management: Track insemination dates and calving reminders.',
+    'Reports: Visual charts for milk yield trends and financial analysis.'
+  ],
+}
+
 ];
 
 const Projects: React.FC = () => {
