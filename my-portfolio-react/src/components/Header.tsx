@@ -13,13 +13,14 @@ const Header: React.FC = () => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const navLinks = [
-        { href: '#about', label: '01. About', number: '01' },
-        { href: '#education', label: '02. Education', number: '02' },
-        { href: '#skills', label: '03. Skills', number: '03' },
-        { href: '#projects', label: '04. Projects', number: '04' },
-        { href: '#achievements', label: '05. Achievements', number: '05' }
-    ];
+   const navLinks = [
+     { href: '#about', label: '01. About', number: '01' },
+     { href: '#education', label: '02. Education', number: '02' },
+     { href: '#skills', label: '03. Skills', number: '03' },
+     { href: '#projects', label: '04. Projects', number: '04' },
+     { href: '#achievements', label: '05. Achievements', number: '05' },
+     { href: '#contact', label: '06. Contact', number: '06' },
+   ];
 
     return (
         <>
@@ -28,14 +29,14 @@ const Header: React.FC = () => {
                     @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap');
                     
                     :root {
-                        --navy: #0a192f;
-                        --light-navy: #112240;
-                        --lightest-navy: #233554;
-                        --slate: #8892b0;
-                        --light-slate: #a8b2d1;
-                        --lightest-slate: #ccd6f6;
-                        --white: #e6f1ff;
-                        --green: #64ffda;
+                        --navy: var(--primary-bg);
+                        --light-navy: var(--secondary-bg);
+                        --lightest-navy: var(--tertiary-bg);
+                        --slate: var(--text-secondary);
+                        --light-slate: var(--text-primary);
+                        --lightest-slate: var(--text-primary);
+                        --white: var(--text-primary);
+                        --green: var(--accent-primary);
                         --font-mono: 'JetBrains Mono', monospace;
                         --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
                         --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -116,9 +117,9 @@ const Header: React.FC = () => {
                     }
 
                     .logo:hover {
-                        background: rgba(100, 255, 218, 0.1);
+                        background: rgba(59, 130, 246, 0.1);
                         transform: translateY(-2px);
-                        box-shadow: 0 10px 30px -10px rgba(100, 255, 218, 0.3);
+                        box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.3);
                     }
 
                     @media (max-width: 768px) {
@@ -225,7 +226,7 @@ const Header: React.FC = () => {
                         left: 0;
                         width: 100%;
                         height: 100%;
-                        background: rgba(10, 25, 47, 0.8);
+                        background: rgba(10, 14, 26, 0.8);
                         backdrop-filter: blur(5px);
                         z-index: 9;
                         opacity: ${menuOpen ? '1' : '0'};
@@ -235,12 +236,12 @@ const Header: React.FC = () => {
 
                     .header-container {
                         background: ${isScrolled 
-                            ? 'rgba(10, 25, 47, 0.85)' 
-                            : 'rgba(10, 25, 47, 0.95)'};
+                            ? 'rgba(10, 14, 26, 0.85)' 
+                            : 'rgba(10, 14, 26, 0.95)'};
                         backdrop-filter: blur(10px);
                         border-bottom: none;
                         box-shadow: ${isScrolled 
-                            ? '0 10px 30px -10px rgba(2, 12, 27, 0.7)' 
+                            ? '0 10px 30px -10px rgba(0, 0, 0, 0.3)' 
                             : 'none'};
                     }
                 `}
@@ -346,7 +347,7 @@ const Header: React.FC = () => {
                                         marginLeft: '15px'
                                     }}
                                     onMouseEnter={(e) => {
-                                        e.currentTarget.style.background = 'rgba(100, 255, 218, 0.1)';
+                                        e.currentTarget.style.background = 'rgba(59, 130, 246, 0.1)';
                                         e.currentTarget.style.transform = 'translateY(-2px)';
                                     }}
                                     onMouseLeave={(e) => {

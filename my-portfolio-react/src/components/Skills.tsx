@@ -4,7 +4,7 @@ const skillsData = [
   {
     category: 'Languages',
     skills: ['Java', 'C', 'Python'],
-    icon: '💻',
+    icon: 'Languages',
   },
   {
     category: 'Web Technology',
@@ -17,249 +17,325 @@ const skillsData = [
       'SQL',
       'Firebase',
     ],
-    icon: '🌐',
+    icon: 'Web Technology',
   },
   {
     category: 'CS Fundamentals',
-    skills: ['Data Structures and Algorithms', 'OOPS', 'Operating Systems', 'DBMS','Computer Networks '],
-    icon: '📚',
+    skills: ['Data Structures and Algorithms', 'OOPS', 'Operating Systems', 'DBMS', 'Computer Networks'],
+    icon: 'CS Fundamentals',
   },
   {
     category: 'Developer Tools',
     skills: ['Git', 'GitHub', 'VS Code', 'Postman', 'Vercel'],
-    icon: '🛠️',
+    icon: 'Developer Tools',
   },
 ];
+
+const categoryIcons: Record<string, string> = {
+  'Languages': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',
+  'Web Technology': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+  'CS Fundamentals': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg', // generic icon for CS fundamentals
+  'Developer Tools': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',
+};
+
+const skillLogos: Record<string, string> = {
+  Java: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',
+  C: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg',
+  Python: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
+  ReactJs: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+  ExpressJs: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg',
+  NodeJs: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
+  JavaScript: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
+  MongoDB: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
+  SQL: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg',
+  Firebase: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg',
+  'Data Structures and Algorithms': '',
+  OOPS: '',
+  'Operating Systems': '',
+  DBMS: '',
+  'Computer Networks': '',
+  Git: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',
+  GitHub: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg',
+  'VS Code': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg',
+  Postman: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postman/postman-original.svg',
+  Vercel: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel.svg',
+};
 
 const Skills: React.FC = () => {
   const [hoveredIndex, setHoveredIndex] = React.useState<number | null>(null);
 
   return (
     <>
-      <style>
-        {`
-          @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+      <style>{`
+        :root {
+          --accent-primary: #3b82f6;
+          --primary-bg: #0f172a;
+          --secondary-bg: #1e293b;
+          --glass-bg: rgba(11, 32, 61, 0.65);
+          --glass-border: rgba(72, 179, 252, 0.3);
+          --glass-shadow: rgba(72, 179, 252, 0.28);
+          --text-primary: #e0e7ff;
+          --text-secondary: #94a3b8;
+          --border-primary: #384655;
+        }
 
-          @keyframes fadeInUp {
-            from {
-              opacity: 0;
-              transform: translateY(30px);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0);
-            }
+        body, .skills-page {
+          font-family: 'Josefin Sans', 'Inter', sans-serif;
+          background: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
+          color: var(--text-primary);
+          margin: 0;
+        }
+
+        @keyframes fadeInUp {
+          from {opacity: 0; transform: translateY(50px);}
+          to {opacity:1; transform: translateY(0);}
+        }
+        @keyframes slideInLeft {
+          from {opacity: 0; transform: translateX(-50px);}
+          to {opacity:1; transform: translateX(0);}
+        }
+        .fade-in-up {
+          animation: fadeInUp 0.8s ease-out forwards;
+          opacity: 0;
+        }
+        .slide-in-left {
+          animation: slideInLeft 0.6s ease-out forwards;
+          opacity: 0;
+        }
+        .fade-in-up.loaded,
+        .slide-in-left.loaded {
+          opacity: 1;
+        }
+
+        section.skills-section {
+          padding: 120px 0;
+          min-height: 100vh;
+          display: flex;
+          align-items: center;
+          position: relative;
+          background: transparent;
+          z-index: 1;
+        }
+
+        .container-glass {
+          max-width: 960px;
+          margin: 0 auto;
+          padding: 48px 40px;
+          background: var(--glass-bg);
+          border-radius: 28px;
+          box-shadow: 0 25px 50px -12px var(--glass-shadow);
+          backdrop-filter: blur(14px);
+          -webkit-backdrop-filter: blur(14px);
+          position: relative;
+          width: 100%;
+        }
+
+        .section-header {
+          margin-bottom: 60px;
+          display: flex;
+          align-items: center;
+          white-space: nowrap;
+        }
+
+        .section-label {
+          font-family: 'Josefin Sans', monospace;
+          font-weight: 700;
+          font-size: 22px;
+          color: var(--accent-primary);
+          letter-spacing: 2px;
+          margin-right: 14px;
+          background: linear-gradient(90deg, var(--accent-primary), var(--text-primary));
+          background-clip: text;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          animation: gradientShift 3s ease-in-out infinite;
+        }
+
+        .section-heading {
+          font-family: 'Josefin Sans', 'Inter', sans-serif;
+          font-size: 36px;
+          font-weight: 700;
+          margin: 0 20px 0 0;
+          color: white !important;
+          line-height: 1.2;
+        }
+
+        .header-line {
+          height: 1px;
+          width: 300px;
+          background: linear-gradient(90deg, var(--accent-primary), transparent);
+          position: relative;
+          top: 2px;
+        }
+
+        @media (max-width: 768px) {
+          .header-line {
+            width: 100px;
           }
+        }
 
-          @keyframes slideInLeft {
-            from {
-              opacity: 0;
-              transform: translateX(-30px);
-            }
-            to {
-              opacity: 1;
-              transform: translateX(0);
-            }
-          }
+        .skills-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 30px;
+        }
 
-          .fade-in-up {
-            animation: fadeInUp 0.6s ease-out forwards;
-          }
+        .skills-card {
+          background: var(--secondary-bg);
+          border-radius: 20px;
+          padding: 30px 25px;
+          box-shadow: 0 10px 30px -15px rgba(0,0,0,0.3);
+          border: 1px solid var(--glass-border);
+          transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+          cursor: pointer;
+          transform-origin: center bottom;
+          position: relative;
+          user-select: none;
+        }
 
-          .slide-in-left {
-            animation: slideInLeft 0.6s ease-out forwards;
-          }
+        .skills-card:hover {
+          box-shadow: 4px 4px 0 0 var(--accent-primary);
+          border: 1px solid var(--accent-primary);
+          transform: translateY(-6px);
+          z-index: 1;
+        }
 
-          .skills-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 150px;
-            width: 100%;
-          }
+        .card-header {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 20px;
+        }
 
-          @media (max-width: 768px) {
-            .skills-container {
-              padding: 0 25px;
-            }
-          }
-        `}
-      </style>
+        .category-icon {
+          width: 28px;
+          height: 28px;
+          filter: drop-shadow(0 2px 2px #0a192f44);
+          object-fit: contain;
+        }
 
-      <section
-        id="skills"
-        style={{
-          background: '#0a192f',
-          padding: '100px 0',
-          minHeight: '100vh',
-          display: 'flex',
-          alignItems: 'center',
-        }}
-        className="fade-in-up"
-      >
-        <div className="skills-container">
-          {/* Section Header */}
-          <div className="slide-in-left" style={{
-            display: 'flex',
-            alignItems: 'center',
-            marginBottom: '50px',
-            whiteSpace: 'nowrap',
-          }}>
-            <h2 style={{
-              color: '#64ffda',
-              fontFamily: "'JetBrains Mono', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', Consolas, 'Courier New', monospace",
-              fontSize: 'clamp(14px, 5vw, 20px)',
-              fontWeight: '400',
-              margin: 0,
-              marginRight: '10px',
-            }}>
-              03.
+        .category-title {
+          font-family: 'Josefin Sans', 'Inter', sans-serif;
+          font-size: 22px;
+          font-weight: 600;
+          color: var(--text-primary);
+          margin: 0;
+        }
+
+        .skills-list {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+          gap: 8px 15px;
+        }
+
+        .skill-item {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-family: 'JetBrains Mono', monospace;
+          font-size: 14px;
+          color: var(--text-secondary);
+          margin-bottom: 10px;
+          user-select: none;
+        }
+
+        .skill-logo {
+          width: 20px;
+          height: 20px;
+          object-fit: contain;
+        }
+
+        @keyframes gradientShift {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+
+        .animated-text span {
+          display: inline-block;
+          animation: textWave 2s ease-in-out infinite;
+        }
+
+        @keyframes textWave {
+          0%, 40%, 100% { transform: translateY(0); }
+          20% { transform: translateY(-8px); }
+        }
+
+        .additional-note {
+          margin-top: 60px;
+          text-align: center;
+          color: var(--text-secondary);
+          font-family: 'Inter', sans-serif;
+          font-size: 18px;
+          line-height: 1.6;
+          font-weight: 400;
+        }
+      `}</style>
+
+      <section className="skills-section fade-in-up" style={{ minHeight: '100vh' }}>
+        <div className="container-glass">
+          <div className="section-header slide-in-left">
+            <div className="section-label">03.</div>
+            <h2 className="section-heading" aria-label="Skills & Technologies">
+              <span className="animated-text">
+                {'Skills & Technologies'.split('').map((char, i) => (
+                  <span
+                    key={i}
+                    style={{
+                      animationDelay: `${i * 0.05}s`,
+                      display: char === ' ' ? 'inline' : 'inline-block',
+                    }}
+                  >
+                    {char === ' ' ? '\u00A0' : char}
+                  </span>
+                ))}
+              </span>
             </h2>
-            <h3 style={{
-              color: '#ccd6f6',
-              fontSize: 'clamp(26px, 5vw, 32px)',
-              fontWeight: '600',
-              fontFamily: "'Inter', 'San Francisco', 'SF Pro Display', -apple-system, system-ui, sans-serif",
-              margin: 0,
-              marginRight: '20px',
-            }}>
-              Skills & Technologies
-            </h3>
-            <div style={{
-              height: '1px',
-              backgroundColor: '#233554',
-              width: '300px',
-              position: 'relative',
-              top: '5px',
-            }}></div>
+            <div className="header-line" />
           </div>
 
-          {/* Skills Grid */}
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '30px',
-          }}>
-            {skillsData.map((group, index) => (
+          <div className="skills-grid">
+            {skillsData.map((group, idx) => (
               <div
-                key={index}
-                style={{
-                  background: '#112240',
-                  borderRadius: '4px',
-                  padding: '30px 25px',
-                  boxShadow: hoveredIndex === index 
-                    ? '4px 4px 0 0 #64ffda' 
-                    : '0 10px 30px -15px rgba(2, 12, 27, 0.7)',
-                  border: hoveredIndex === index 
-                    ? '1px solid #64ffda' 
-                    : '1px solid rgba(100, 255, 218, 0.1)',
-                  transition: 'all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1)',
-                  cursor: 'pointer',
-                  transform: hoveredIndex === index ? 'translateY(-4px)' : 'translateY(0)',
-                  position: 'relative',
-                }}
-                onMouseEnter={() => setHoveredIndex(index)}
+                key={idx}
+                className="skills-card"
+                onMouseEnter={() => setHoveredIndex(idx)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
-                {/* Category Header */}
-                <div style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  marginBottom: '20px',
-                  gap: '12px',
-                }}>
-                  <span style={{
-                    fontSize: '24px',
-                    filter: 'drop-shadow(0 2px 2px #0a192f44)',
-                  }}>
-                    {group.icon}
-                  </span>
-                  <h4 style={{
-                    color: '#ccd6f6',
-                    fontSize: '20px',
-                    fontWeight: '600',
-                    fontFamily: "'Inter', 'San Francisco', 'SF Pro Display', -apple-system, system-ui, sans-serif",
-                    margin: 0,
-                  }}>
-                    {group.category}
-                  </h4>
+                <div className="card-header">
+                  <img
+                    src={categoryIcons[group.category]}
+                    alt={`${group.category} icon`}
+                    className="category-icon"
+                  />
+                  <h3 className="category-title">{group.category}</h3>
                 </div>
-
-                {/* Skills List */}
-                <ul style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))',
-                  gap: '8px 15px',
-                  padding: 0,
-                  margin: 0,
-                  listStyle: 'none',
-                }}>
+                <ul className="skills-list">
                   {group.skills.map((skill, skillIndex) => (
-                    <li key={skillIndex} style={{
-                      position: 'relative',
-                      paddingLeft: '20px',
-                      fontFamily: "'JetBrains Mono', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', Consolas, 'Courier New', monospace",
-                      fontSize: '13px',
-                      color: '#8892b0',
-                      marginBottom: '8px',
-                    }}>
-                      <span style={{
-                        position: 'absolute',
-                        left: '0px',
-                        color: '#64ffda',
-                        fontSize: '14px',
-                        lineHeight: '12px',
-                      }}>▹</span>
+                    <li key={skillIndex} className="skill-item">
+                      {skillLogos[skill] ? (
+                        <img
+                          src={skillLogos[skill]}
+                          alt={`${skill} logo`}
+                          className="skill-logo"
+                        />
+                      ) : (
+                        <span style={{ color: 'var(--accent-primary)', fontWeight: 'bold' }}>▹</span>
+                      )}
                       {skill}
                     </li>
                   ))}
                 </ul>
-
-                {/* Skill Tags Alternative (commented out, using list instead) */}
-                {/* 
-                <div style={{
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  gap: '8px',
-                  marginTop: '15px',
-                }}>
-                  {group.skills.map((skill, skillIndex) => (
-                    <span key={skillIndex} style={{
-                      display: 'inline-block',
-                      padding: '0.25rem 0.5rem',
-                      margin: '0.25rem',
-                      background: 'rgba(100, 255, 218, 0.1)',
-                      color: '#64ffda',
-                      borderRadius: '3px',
-                      fontFamily: "'JetBrains Mono', 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', Consolas, 'Courier New', monospace",
-                      fontSize: '0.75rem',
-                      fontWeight: '400',
-                      transition: 'all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1)',
-                    }}>
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-                */}
               </div>
             ))}
           </div>
 
-          {/* Additional Skills Note */}
-          <div style={{
-            textAlign: 'center',
-            marginTop: '60px',
-          }}>
-            <p style={{
-              color: '#8892b0',
-              fontSize: '18px',
-              lineHeight: '1.6',
-              fontFamily: "'Inter', 'San Francisco', 'SF Pro Display', -apple-system, system-ui, sans-serif",
-              fontWeight: '400',
-              margin: 0,
-            }}>
-              Always learning and exploring new technologies to stay current with industry trends.
-            </p>
-          </div>
+          <p className="additional-note">
+            Always learning and exploring new technologies to stay current with industry trends.
+          </p>
         </div>
       </section>
     </>
