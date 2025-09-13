@@ -93,14 +93,35 @@ function App() {
 
       <div className="app-container">
         <Header />
-        <About />
-        <Education />
-        <Skills />
-        <Projects />
-        <Achievements />
-        <Contact />
+        <section id="about">
+          <About />
+        </section>
+        <section id="education">
+          <Education />
+        </section>
+        <section id="skills">
+          <Skills />
+        </section>
+        <section id="projects">
+          <Projects />
+        </section>
+        <section id="achievements">
+          <Achievements />
+        </section>
+        <section id="contact">
+          <Contact />
+        </section>
         <Footer />
       </div>
+      
+      
+      
+      
+      
+      
+      
+      
+      
     </>
   );
 }

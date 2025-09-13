@@ -8,19 +8,51 @@ const Header: React.FC = () => {
     React.useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 50);
+            
+            // Update active section based on scroll position
+            const sections = ['about', 'education', 'skills', 'projects', 'achievements', 'contact'];
+            const scrollPosition = window.scrollY + 100;
+            
+            for (const section of sections) {
+                const element = document.getElementById(section);
+                if (element) {
+                    const { offsetTop, offsetHeight } = element;
+                    if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+                        setActiveSection(section);
+                        break;
+                    }
+                }
+            }
         };
+        
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-   const navLinks = [
-     { href: '#about', label: '01. About', number: '01' },
-     { href: '#education', label: '02. Education', number: '02' },
-     { href: '#skills', label: '03. Skills', number: '03' },
-     { href: '#projects', label: '04. Projects', number: '04' },
-     { href: '#achievements', label: '05. Achievements', number: '05' },
-     { href: '#contact', label: '06. Contact', number: '06' },
-   ];
+    // Smooth scroll function
+    const scrollToSection = (sectionId: string) => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+            const headerHeight = 90; // Account for fixed header
+            const targetPosition = element.offsetTop - headerHeight;
+            
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+        }
+        setActiveSection(sectionId);
+        setMenuOpen(false);
+    };
+
+    const navLinks = [
+        { href: 'about', label: '01. About', number: '01' },
+        { href: 'education', label: '02. Education', number: '02' },
+        { href: 'skills', label: '03. Skills', number: '03' },
+        { href: 'projects', label: '04. Projects', number: '04' },
+        { href: 'achievements', label: '05. Achievements', number: '05' },
+        { href: 'contact', label: '06. Contact', number: '06' },
+    ];
 
     return (
         <>
@@ -40,6 +72,12 @@ const Header: React.FC = () => {
                         --font-mono: 'JetBrains Mono', monospace;
                         --font-sans: 'Inter', -apple-system, system-ui, sans-serif;
                         --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+                    }
+
+                    /* Ensure smooth scrolling for the whole document */
+                    html {
+                        scroll-behavior: smooth;
+                        scroll-padding-top: 90px;
                     }
 
                     @keyframes fadeInDown {
@@ -77,13 +115,15 @@ const Header: React.FC = () => {
                         color: var(--lightest-slate);
                         text-decoration: none;
                         font-family: var(--font-mono);
-                        font-size: 13px;
+                        font-size: clamp(11px, 1.5vw, 13px);
                         font-weight: 400;
-                        padding: 10px 15px;
+                        padding: clamp(8px, 1.5vw, 10px) clamp(12px, 2vw, 15px);
                         border-radius: 4px;
                         transition: var(--transition);
                         position: relative;
                         letter-spacing: 0.1em;
+                        cursor: pointer;
+                        display: block;
                     }
 
                     .nav-link:hover {
@@ -98,22 +138,23 @@ const Header: React.FC = () => {
                     .nav-number {
                         color: var(--green);
                         margin-right: 8px;
-                        font-size: 12px;
+                        font-size: clamp(10px, 1.2vw, 12px);
                     }
 
                     .logo {
                         color: var(--green);
                         font-family: var(--font-mono);
-                        font-size: 20px;
+                        font-size: clamp(16px, 2.5vw, 20px);
                         font-weight: 600;
                         text-decoration: none;
                         letter-spacing: -0.02em;
                         position: relative;
-                        padding: 10px;
+                        padding: clamp(8px, 1.5vw, 10px);
                         border: 2px solid var(--green);
                         border-radius: 4px;
                         transition: var(--transition);
                         background: transparent;
+                        cursor: pointer;
                     }
 
                     .logo:hover {
@@ -122,6 +163,68 @@ const Header: React.FC = () => {
                         box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.3);
                     }
 
+                    .header-container {
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        right: 0;
+                        padding: ${isScrolled ? 'clamp(10px, 2vw, 15px) clamp(20px, 4vw, 50px)' : 'clamp(15px, 2.5vw, 20px) clamp(20px, 4vw, 50px)'};
+                        transition: var(--transition);
+                        z-index: 1000;
+                        font-family: var(--font-sans);
+                        background: ${isScrolled 
+                            ? 'rgba(10, 14, 26, 0.85)' 
+                            : 'rgba(10, 14, 26, 0.95)'};
+                        backdrop-filter: blur(10px);
+                        border-bottom: none;
+                        box-shadow: ${isScrolled 
+                            ? '0 10px 30px -10px rgba(0, 0, 0, 0.3)' 
+                            : 'none'};
+                    }
+
+                    .header-content {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        max-width: 1600px;
+                        margin: 0 auto;
+                        width: 100%;
+                    }
+
+                    .desktop-nav {
+                        display: flex;
+                    }
+
+                    .desktop-nav ol {
+                        display: flex;
+                        list-style: none;
+                        gap: clamp(20px, 3vw, 35px);
+                        margin: 0;
+                        padding: 0;
+                        align-items: center;
+                        flex-wrap: wrap;
+                    }
+
+                    .resume-btn {
+                        color: var(--green);
+                        background: transparent;
+                        border: 1px solid var(--green);
+                        border-radius: 4px;
+                        padding: clamp(10px, 1.5vw, 12px) clamp(14px, 2vw, 16px);
+                        font-family: var(--font-mono);
+                        font-size: clamp(11px, 1.5vw, 13px);
+                        text-decoration: none;
+                        transition: var(--transition);
+                        margin-left: clamp(10px, 2vw, 15px);
+                        white-space: nowrap;
+                    }
+
+                    .resume-btn:hover {
+                        background: rgba(59, 130, 246, 0.1);
+                        transform: translateY(-2px);
+                    }
+
+                    /* Mobile Styles */
                     @media (max-width: 768px) {
                         .desktop-nav {
                             display: none !important;
@@ -129,11 +232,35 @@ const Header: React.FC = () => {
                         .mobile-nav-button {
                             display: flex !important;
                         }
+                        .header-container {
+                            padding: ${isScrolled ? '12px 20px' : '15px 20px'};
+                        }
                     }
 
                     @media (min-width: 769px) {
                         .mobile-nav-button {
                             display: none !important;
+                        }
+                    }
+
+                    /* Tablet adjustments */
+                    @media (min-width: 769px) and (max-width: 1024px) {
+                        .desktop-nav ol {
+                            gap: 20px;
+                        }
+                        .nav-link {
+                            padding: 8px 12px;
+                            font-size: 12px;
+                        }
+                    }
+
+                    /* Large screens */
+                    @media (min-width: 1440px) {
+                        .header-container {
+                            padding: ${isScrolled ? '15px 60px' : '20px 60px'};
+                        }
+                        .desktop-nav ol {
+                            gap: 40px;
                         }
                     }
 
@@ -207,6 +334,7 @@ const Header: React.FC = () => {
                         text-align: center;
                         transition: var(--transition);
                         letter-spacing: 0.1em;
+                        cursor: pointer;
                     }
 
                     .mobile-nav-link:hover {
@@ -218,6 +346,20 @@ const Header: React.FC = () => {
                         display: block;
                         font-size: 14px;
                         margin-bottom: 5px;
+                    }
+
+                    .mobile-resume-btn {
+                        color: var(--green);
+                        background: transparent;
+                        border: 1px solid var(--green);
+                        border-radius: 4px;
+                        padding: 18px 50px;
+                        font-family: var(--font-mono);
+                        font-size: 14px;
+                        text-decoration: none;
+                        transition: var(--transition);
+                        display: inline-block;
+                        margin: 40px 0 20px;
                     }
 
                     .overlay {
@@ -234,52 +376,59 @@ const Header: React.FC = () => {
                         transition: var(--transition);
                     }
 
-                    .header-container {
-                        background: ${isScrolled 
-                            ? 'rgba(10, 14, 26, 0.85)' 
-                            : 'rgba(10, 14, 26, 0.95)'};
-                        backdrop-filter: blur(10px);
-                        border-bottom: none;
-                        box-shadow: ${isScrolled 
-                            ? '0 10px 30px -10px rgba(0, 0, 0, 0.3)' 
-                            : 'none'};
+                    /* Extra small mobile adjustments */
+                    @media (max-width: 480px) {
+                        .logo {
+                            font-size: 16px;
+                            padding: 6px 8px;
+                        }
+                        .mobile-sidebar {
+                            width: 85vw;
+                            padding: 40px 10px;
+                        }
+                        .mobile-nav-link {
+                            font-size: 16px;
+                            padding: 12px 16px;
+                        }
+                        .mobile-resume-btn {
+                            padding: 14px 30px;
+                            font-size: 13px;
+                        }
+                    }
+
+                    /* Landscape mobile adjustments */
+                    @media (max-width: 767px) and (orientation: landscape) {
+                        .header-container {
+                            padding: 8px 20px;
+                        }
+                        .logo {
+                            font-size: 14px;
+                            padding: 6px;
+                        }
+                        .mobile-sidebar {
+                            padding: 20px 10px;
+                            justify-content: flex-start;
+                            padding-top: 60px;
+                        }
+                        .mobile-nav-item {
+                            margin: 10px 0;
+                        }
                     }
                 `}
             </style>
 
-            <header
-                className="header-container"
-                style={{
-                    position: 'fixed',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    padding: isScrolled ? '15px 50px' : '20px 50px',
-                    transition: 'var(--transition)',
-                    zIndex: 1000,
-                    fontFamily: 'var(--font-sans)'
-                }}
-            >
-                <div
-                    style={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        maxWidth: '1600px',
-                        margin: '0 auto'
-                    }}
-                    className="fade-in-down"
-                >
-                    <a
-                        href="#"
+            <header className="header-container">
+                <div className="header-content fade-in-down">
+                    <button
                         className="logo"
+                        onClick={() => scrollToSection('about')}
                         style={{
                             fontSize: isScrolled ? '18px' : '20px',
                             transition: 'var(--transition)'
                         }}
                     >
                         MOHITH
-                    </a>
+                    </button>
 
                     {/* Mobile Hamburger */}
                     <button
@@ -294,16 +443,7 @@ const Header: React.FC = () => {
 
                     {/* Desktop Nav */}
                     <nav className="desktop-nav">
-                        <ol
-                            style={{
-                                display: 'flex',
-                                listStyle: 'none',
-                                gap: '35px',
-                                margin: 0,
-                                padding: 0,
-                                alignItems: 'center'
-                            }}
-                        >
+                        <ol>
                             {navLinks.map((item, index) => (
                                 <li
                                     key={item.href}
@@ -312,16 +452,21 @@ const Header: React.FC = () => {
                                         animationDelay: `${0.1 + index * 0.1}s`
                                     }}
                                 >
-                                    <a
-                                        href={item.href}
-                                        onClick={() => setActiveSection(item.href.slice(1))}
+                                    <button
+                                        onClick={() => scrollToSection(item.href)}
                                         className={`nav-link ${
-                                            activeSection === item.href.slice(1) ? 'active' : ''
+                                            activeSection === item.href ? 'active' : ''
                                         }`}
+                                        style={{
+                                            background: 'none',
+                                            border: 'none',
+                                            width: '100%',
+                                            textAlign: 'left'
+                                        }}
                                     >
                                         <span className="nav-number">{item.number}.</span>
                                         {item.label.split('.')[1].trim()}
-                                    </a>
+                                    </button>
                                 </li>
                             ))}
                             <li
@@ -334,26 +479,7 @@ const Header: React.FC = () => {
                                     href="/resume.pdf"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    style={{
-                                        color: 'var(--green)',
-                                        background: 'transparent',
-                                        border: '1px solid var(--green)',
-                                        borderRadius: '4px',
-                                        padding: '12px 16px',
-                                        fontFamily: 'var(--font-mono)',
-                                        fontSize: '13px',
-                                        textDecoration: 'none',
-                                        transition: 'var(--transition)',
-                                        marginLeft: '15px'
-                                    }}
-                                    onMouseEnter={(e) => {
-                                        e.currentTarget.style.background = 'rgba(59, 130, 246, 0.1)';
-                                        e.currentTarget.style.transform = 'translateY(-2px)';
-                                    }}
-                                    onMouseLeave={(e) => {
-                                        e.currentTarget.style.background = 'transparent';
-                                        e.currentTarget.style.transform = 'translateY(0)';
-                                    }}
+                                    className="resume-btn"
                                 >
                                     Resume
                                 </a>
@@ -376,42 +502,31 @@ const Header: React.FC = () => {
                                     animationDelay: `${0.1 + index * 0.1}s`
                                 }}
                             >
-                                <a
-                                    href={item.href}
-                                    onClick={() => {
-                                        setActiveSection(item.href.slice(1));
-                                        setMenuOpen(false);
-                                    }}
+                                <button
+                                    onClick={() => scrollToSection(item.href)}
                                     className="mobile-nav-link"
+                                    style={{
+                                        background: 'none',
+                                        border: 'none',
+                                        width: '100%'
+                                    }}
                                 >
                                     <span className="mobile-nav-number">{item.number}.</span>
                                     {item.label.split('.')[1].trim()}
-                                </a>
+                                </button>
                             </li>
                         ))}
                         <li
                             className="mobile-nav-item"
                             style={{
-                                animationDelay: `${0.1 + navLinks.length * 0.1}s`,
-                                margin: '40px 0 20px'
+                                animationDelay: `${0.1 + navLinks.length * 0.1}s`
                             }}
                         >
                             <a
                                 href="/resume.pdf"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                style={{
-                                    color: 'var(--green)',
-                                    background: 'transparent',
-                                    border: '1px solid var(--green)',
-                                    borderRadius: '4px',
-                                    padding: '18px 50px',
-                                    fontFamily: 'var(--font-mono)',
-                                    fontSize: '14px',
-                                    textDecoration: 'none',
-                                    transition: 'var(--transition)',
-                                    display: 'inline-block'
-                                }}
+                                className="mobile-resume-btn"
                             >
                                 Resume
                             </a>

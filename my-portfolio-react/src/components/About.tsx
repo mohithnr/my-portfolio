@@ -98,17 +98,17 @@ const About: React.FC = () => {
           min-height: 100vh;
           overflow-x: hidden;
         }
-        // .custom-cursor {
-        //   width: 20px;
-        //   height: 20px;
-        //   border: 2px solid var(--accent-primary);
-        //   border-radius: 50%;
-        //   position: fixed;
-        //   pointer-events: none;
-        //   background: rgba(59,130,246,0.12);
-        //   z-index: 10000;
-        //   transition: background .2s, border .2s;
-        // }
+        
+        /* Hide custom cursor on touch devices */
+        @media (hover: none) and (pointer: coarse) {
+          .custom-cursor {
+            display: none !important;
+          }
+          [style*="cursor: none"] {
+            cursor: auto !important;
+          }
+        }
+        
         .floating-particles {
           pointer-events: none;
           position: fixed;
@@ -123,16 +123,16 @@ const About: React.FC = () => {
           border-radius: 50%;
           background: linear-gradient(60deg, var(--accent-primary) 20%, transparent 100%);
           opacity: 0.1;
-          width: 40px;
-          height: 40px;
+          width: clamp(20px, 4vw, 40px);
+          height: clamp(20px, 4vw, 40px);
           animation: floatEffect 14s linear infinite;
         }
         .sparkle {
           position: absolute;
           border-radius: 50%;
           background: var(--accent-primary);
-          width: 8px;
-          height: 8px;
+          width: clamp(4px, 1vw, 8px);
+          height: clamp(4px, 1vw, 8px);
           opacity: 0.13;
           animation: sparkleEffect 8s linear infinite;
         }
@@ -145,8 +145,10 @@ const About: React.FC = () => {
           50% { transform: scale(1.5);}
           100% { transform: scale(1);}
         }
+        
+        /* Responsive Section */
         .about-section {
-          padding: 120px 0;
+          padding: clamp(60px, 12vw, 120px) clamp(15px, 4vw, 40px);
           min-height: 100vh;
           background: transparent;
           display: flex;
@@ -154,58 +156,71 @@ const About: React.FC = () => {
           position: relative;
           z-index: 1;
         }
+        
+        /* Responsive Container */
         .about-container {
           max-width: 960px;
           margin: 0 auto;
-          padding: 48px 40px;
+          padding: clamp(24px, 5vw, 48px) clamp(20px, 4vw, 40px);
           width: 100%;
           position: relative;
           background: var(--container-bg);
-          border-radius: 28px;
+          border-radius: clamp(16px, 3vw, 28px);
           box-shadow: 0 8px 38px -10px rgba(59, 130, 246, 0.3);
           backdrop-filter: blur(14px);
           -webkit-backdrop-filter: blur(14px);
         }
-        .section-label {
+        
+        /* Responsive Section Header */
+        .section-header {
           display: flex;
           align-items: center;
-          gap: 14px;
-          margin-bottom: 12px;
+          gap: clamp(8px, 2vw, 16px);
+          margin-bottom: clamp(20px, 4vw, 32px);
+          flex-wrap: wrap;
         }
-        .section-label span {
-          font-family: 'Josefin Sans', monospace;
-          font-weight: 700;
-          font-size: 22px;
+
+        .section-label {
           color: var(--accent-primary);
-          letter-spacing: 2px;
-          background: linear-gradient(90deg, var(--accent-primary), var(--text-primary));
-          background-clip: text;
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          animation: gradientShift 3s infinite;
+          font-family: 'JetBrains Mono', monospace;
+          font-weight: 700;
+          font-size: clamp(18px, 3vw, 24px);
+          white-space: nowrap;
         }
+
         .section-heading {
           font-family: 'Josefin Sans', 'Inter', sans-serif;
-          font-size: 36px;
+          font-size: clamp(24px, 5vw, 36px);
           font-weight: 700;
-          margin: 0 0 24px 0;
+          margin: 0;
           color: var(--text-primary);
           line-height: 1.2;
+          white-space: nowrap;
         }
+
+        .header-line {
+          flex-grow: 1;
+          border-bottom: 1px solid var(--accent-primary);
+          opacity: 0.4;
+          min-width: 50px;
+        }
+        
         .main-content {
           display: flex;
           flex-direction: column;
           align-items: center;
           text-align: center;
         }
+        
+        /* Responsive Profile Image */
         .profile-image-area {
           position: relative;
-          margin-bottom: 40px;
+          margin-bottom: clamp(24px, 5vw, 40px);
         }
         .profile-border {
           position: absolute;
-          width: 240px;
-          height: 240px;
+          width: clamp(120px, 25vw, 240px);
+          height: clamp(120px, 25vw, 240px);
           border-radius: 50%;
           border: 3px solid transparent;
           background: linear-gradient(45deg, var(--accent-primary), var(--text-primary), var(--accent-primary)) border-box;
@@ -216,8 +231,8 @@ const About: React.FC = () => {
         }
         .profile-image {
           position: relative;
-          width: 240px;
-          height: 240px;
+          width: clamp(120px, 25vw, 240px);
+          height: clamp(120px, 25vw, 240px);
           border-radius: 50%;
           overflow: hidden;
           box-shadow: 0 4px 38px 0 rgba(59,130,246,0.14);
@@ -236,20 +251,36 @@ const About: React.FC = () => {
         .profile-image:hover img {
           filter: grayscale(0%) contrast(1.15);
         }
+        
+        /* Responsive Text Content */
+        .text-content {
+          max-width: 700px;
+          text-align: left;
+          color: var(--text-primary);
+          width: 100%;
+        }
+        
+        .text-content p {
+          font-size: clamp(14px, 2.5vw, 18px);
+          line-height: 1.6;
+          margin-bottom: 1.2em;
+        }
+        
+        /* Responsive Tech Grid */
         .tech-grid {
           display: grid;
-          grid-template-columns: repeat(2, minmax(140px, 220px));
-          gap: 16px 26px;
+          grid-template-columns: repeat(auto-fit, minmax(clamp(120px, 25vw, 180px), 1fr));
+          gap: clamp(12px, 2vw, 16px) clamp(16px, 3vw, 26px);
           list-style: none;
-          margin: 36px 0 0 0;
+          margin: clamp(24px, 4vw, 36px) 0 0 0;
           padding: 0;
           color: var(--text-secondary);
           font-family: 'JetBrains Mono', monospace;
-          font-size: 15px;
+          font-size: clamp(13px, 2vw, 15px);
         }
         .tech-item {
           position: relative;
-          padding-left: 22px;
+          padding-left: clamp(18px, 3vw, 22px);
           cursor: default;
           transition: color 0.3s ease, transform 0.3s ease;
         }
@@ -258,31 +289,33 @@ const About: React.FC = () => {
           position: absolute;
           left: 0;
           color: var(--accent-primary);
-          font-size: 19px;
+          font-size: clamp(16px, 2.5vw, 19px);
         }
         .tech-item:hover {
           color: var(--accent-primary);
           transform: translateX(9px);
         }
+        
+        /* Responsive Social Links */
         .social-container {
           display: flex;
           justify-content: center;
-          gap: 24px;
-          margin-top: 40px;
+          gap: clamp(16px, 3vw, 24px);
+          margin-top: clamp(24px, 5vw, 40px);
           flex-wrap: wrap;
         }
         .social-link {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 50px;
-          height: 50px;
-          border-radius: 12px;
+          width: clamp(44px, 8vw, 50px);
+          height: clamp(44px, 8vw, 50px);
+          border-radius: clamp(8px, 2vw, 12px);
           background: transparent;
           border: 2px solid var(--border-primary);
           color: var(--text-secondary);
           text-decoration: none;
-          font-size: 21px;
+          font-size: clamp(18px, 3vw, 21px);
           transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
           position: relative;
           cursor: pointer;
@@ -294,15 +327,17 @@ const About: React.FC = () => {
           box-shadow: 0 12px 36px -8px rgba(59, 130, 246, 0.35);
           z-index: 2;
         }
+        
+        /* Responsive Resume Button */
         .resume-button {
-          margin-top: 50px;
-          padding: 18px 36px;
+          margin-top: clamp(32px, 6vw, 50px);
+          padding: clamp(14px, 2.5vw, 18px) clamp(24px, 4vw, 36px);
           background: transparent;
           color: var(--accent-primary);
           border: 2px solid var(--accent-primary);
           border-radius: 8px;
           font-family: 'JetBrains Mono', monospace;
-          font-size: 16px;
+          font-size: clamp(14px, 2vw, 16px);
           font-weight: 600;
           text-decoration: none;
           cursor: pointer;
@@ -310,6 +345,9 @@ const About: React.FC = () => {
           display: inline-block;
           position: relative;
           overflow: hidden;
+          width: 100%;
+          max-width: 300px;
+          text-align: center;
         }
         .resume-button:hover {
           background: rgba(59,130,246,0.12);
@@ -317,75 +355,216 @@ const About: React.FC = () => {
           box-shadow: 6px 6px 0 0 var(--accent-primary);
           z-index: 2;
         }
+        
+        /* Responsive Stats */
         .about-stats {
           display: flex;
           justify-content: space-around;
-          margin-top: 70px;
-          padding: 30px 0;
+          margin-top: clamp(40px, 8vw, 70px);
+          padding: clamp(20px, 4vw, 30px) 0;
           border-top: 1px solid var(--border-primary);
           color: var(--text-secondary);
           font-family: 'Josefin Sans', sans-serif;
+          flex-wrap: wrap;
+          gap: clamp(16px, 3vw, 24px);
         }
         .about-stats > div {
           text-align: center;
+          flex: 1;
+          min-width: 80px;
         }
-          .section-header {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 32px;
-}
-
-.section-label {
-  color: var(--accent-primary);
-  font-family: 'JetBrains Mono', monospace;
-  font-weight: 700;
-  font-size: 24px;
-  white-space: nowrap;
-}
-
-.header-line {
-  flex-grow: 1;
-  border-bottom: 1px solid var(--accent-primary);
-  opacity: 0.4;
-}
-
         .stat-value {
           font-family: 'JetBrains Mono', monospace;
           font-weight: 700;
-          font-size: 26px;
+          font-size: clamp(20px, 4vw, 26px);
           color: var(--accent-primary);
         }
         .stat-label {
           margin-top: 8px;
-          font-size: 14px;
+          font-size: clamp(12px, 2vw, 14px);
         }
-        @media (max-width: 870px) {
-          .about-container {
-            padding: 36px 24px;
+        
+        /* Tablet Responsive (768px to 1023px) */
+        @media (min-width: 768px) and (max-width: 1023px) {
+          .about-section {
+            padding: 80px 30px;
           }
-          .profile-border, .profile-image {
-            width: 180px;
-            height: 180px;
+          .about-container {
+            padding: 36px 30px;
+          }
+          .tech-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+          .text-content {
+            text-align: center;
+          }
+          .social-container {
+            gap: 20px;
+          }
+        }
+        
+        /* Large Mobile (481px to 767px) */
+        @media (min-width: 481px) and (max-width: 767px) {
+          .about-section {
+            padding: 60px 20px;
+          }
+          .section-header {
+            justify-content: center;
+            text-align: center;
+          }
+          .section-heading {
+            white-space: normal;
+          }
+          .header-line {
+            display: none;
+          }
+          .text-content {
+            text-align: center;
           }
           .tech-grid {
             grid-template-columns: 1fr;
-            gap: 16px;
+            max-width: 400px;
+            margin: 24px auto 0 auto;
           }
-          .section-heading {
-            font-size: 28px;
+          .about-stats {
+            flex-direction: column;
+            gap: 20px;
+          }
+          .about-stats > div {
+            padding: 16px;
+            border: 1px solid var(--border-primary);
+            border-radius: 8px;
           }
         }
-        @media (max-width: 440px) {
-          .profile-border, .profile-image {
-            width: 140px;
-            height: 140px;
+        
+        /* Small Mobile (320px to 480px) */
+        @media (max-width: 480px) {
+          .about-section {
+            padding: 40px 15px;
+            min-height: auto;
+          }
+          .about-container {
+            padding: 24px 20px;
+            border-radius: 16px;
+          }
+          .section-header {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 12px;
+          }
+          .header-line {
+            display: none;
+          }
+          .text-content {
+            text-align: center;
+          }
+          .tech-grid {
+            grid-template-columns: 1fr;
+            max-width: 300px;
+            margin: 20px auto 0 auto;
+            text-align: left;
+          }
+          .social-container {
+            gap: 16px;
+            margin-top: 30px;
+          }
+          .social-link {
+            width: 44px;
+            height: 44px;
+            font-size: 18px;
           }
           .resume-button {
-            padding: 14px 26px;
+            margin-top: 30px;
+            padding: 12px 20px;
             font-size: 14px;
+            width: 100%;
+            max-width: 250px;
+          }
+          .about-stats {
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 40px;
+          }
+          .about-stats > div {
+            padding: 12px;
+            border: 1px solid var(--border-primary);
+            border-radius: 6px;
+          }
+          .profile-image-area {
+            margin-bottom: 30px;
           }
         }
+        
+        /* Extra Small Mobile (below 320px) */
+        @media (max-width: 319px) {
+          .about-section {
+            padding: 30px 10px;
+          }
+          .about-container {
+            padding: 20px 15px;
+          }
+          .section-label {
+            font-size: 16px;
+          }
+          .section-heading {
+            font-size: 20px;
+          }
+          .text-content p {
+            font-size: 14px;
+          }
+          .tech-grid {
+            font-size: 12px;
+            max-width: 250px;
+          }
+          .resume-button {
+            padding: 10px 16px;
+            font-size: 13px;
+          }
+        }
+        
+        /* Landscape Mode for Mobile */
+        @media (max-width: 767px) and (orientation: landscape) {
+          .about-section {
+            padding: 30px 20px;
+            min-height: auto;
+          }
+          .profile-image-area {
+            margin-bottom: 20px;
+          }
+          .profile-border, .profile-image {
+            width: 100px;
+            height: 100px;
+          }
+          .section-heading {
+            font-size: 24px;
+          }
+        }
+        
+        /* Touch Device Optimizations */
+        @media (hover: none) and (pointer: coarse) {
+          .tech-item:hover,
+          .social-link:hover,
+          .resume-button:hover {
+            transform: none;
+          }
+          .social-link:active {
+            opacity: 0.7;
+            transform: scale(0.95);
+          }
+          .resume-button:active {
+            opacity: 0.8;
+            transform: scale(0.98);
+          }
+          .profile-image:hover {
+            transform: none;
+          }
+          .profile-border {
+            animation: none;
+          }
+        }
+        
+        /* Animation keyframes */
         @keyframes gradientShift {
           0% { background-position: 0% 50%; }
           50% { background-position: 100% 50%; }
@@ -394,6 +573,20 @@ const About: React.FC = () => {
         @keyframes pulseGlow {
           0%, 100% { box-shadow: 0 0 24px 0 var(--accent-primary); }
           50% { box-shadow: 0 0 42px 6px var(--accent-primary); }
+        }
+        
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+          .particle,
+          .sparkle {
+            animation: none;
+          }
+          .profile-border {
+            animation: none;
+          }
+          .tech-item:hover {
+            transform: none;
+          }
         }
       `}</style>
 
@@ -422,33 +615,22 @@ const About: React.FC = () => {
       <section id="about" className="about-section" data-aos="fade-up">
         <div className="about-container">
           <div className="section-header">
-  <h2 className="section-label">01.</h2>
-  <h3 className="section-heading animated-text" aria-label="About Me" style={{ whiteSpace: 'nowrap' }}>
-    {'About Me'.split('').map((char, i) => (
-      <span
-        key={i}
-        style={{
-          animationDelay: `${i * 0.05}s`,
-          display: char === ' ' ? 'inline' : 'inline-block',
-        }}
-      >
-        {char === ' ' ? '\u00A0' : char}
-      </span>
-    ))}
-  </h3>
-  <div className="header-line"></div>
-</div>
-
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
+            <h2 className="section-label">01.</h2>
+            <h3 className="section-heading animated-text" aria-label="About Me">
+              {'About Me'.split('').map((char, i) => (
+                <span
+                  key={i}
+                  style={{
+                    animationDelay: `${i * 0.05}s`,
+                    display: char === ' ' ? 'inline' : 'inline-block',
+                  }}
+                >
+                  {char === ' ' ? '\u00A0' : char}
+                </span>
+              ))}
+            </h3>
+            <div className="header-line"></div>
+          </div>
 
           <div className="main-content">
             <div
@@ -479,10 +661,7 @@ const About: React.FC = () => {
               </div>
             </div>
 
-            <div
-              className="text-content"
-              style={{ maxWidth: '700px', textAlign: 'left', color: 'var(--text-primary)' }}
-            >
+            <div className="text-content">
               <p>
                 Hello! I'm{' '}
                 <span
