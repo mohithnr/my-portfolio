@@ -138,6 +138,11 @@ const Projects: React.FC = () => {
             0%, 100% {transform: translateY(0);}
             50% {transform: translateY(-8px);}
           }
+          @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+          }
 
           .fade-in-up {
             animation: fadeInUp 0.6s ease forwards;
@@ -166,14 +171,66 @@ const Projects: React.FC = () => {
             align-items: center;
             flex-direction: column;
             padding: 100px 0;
+            /* Fixed z-index to be below mobile sidebar */
+            position: relative;
+            z-index: 1;
           }
+          
+          .floating-particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+          }
+          
+          .particle, .sparkle {
+            position: absolute;
+            background: var(--accent-primary);
+            border-radius: 50%;
+            opacity: 0.6;
+            animation: float 6s ease-in-out infinite;
+          }
+          
+          .particle {
+            width: 4px;
+            height: 4px;
+          }
+          
+          .sparkle {
+            width: 2px;
+            height: 2px;
+            opacity: 0.8;
+          }
+          
+          @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-20px) rotate(120deg); }
+            66% { transform: translateY(10px) rotate(240deg); }
+          }
+          
+          .particle:nth-child(1) { top: 20%; left: 20%; animation-delay: 0s; }
+          .particle:nth-child(2) { top: 60%; left: 80%; animation-delay: 1s; }
+          .particle:nth-child(3) { top: 80%; left: 40%; animation-delay: 2s; }
+          .particle:nth-child(4) { top: 40%; left: 60%; animation-delay: 3s; }
+          .particle:nth-child(5) { top: 10%; left: 70%; animation-delay: 4s; }
+          .particle:nth-child(6) { top: 70%; left: 10%; animation-delay: 5s; }
+          .particle:nth-child(7) { top: 30%; left: 30%; animation-delay: 2.5s; }
+          .particle:nth-child(8) { top: 90%; left: 90%; animation-delay: 1.5s; }
+          
+          .sparkle:nth-child(9) { top: 25%; left: 75%; animation-delay: 0.5s; }
+          .sparkle:nth-child(10) { top: 75%; left: 25%; animation-delay: 3.5s; }
+          .sparkle:nth-child(11) { top: 50%; left: 90%; animation-delay: 4.5s; }
+
           .projects-container {
             position: relative;
             max-width: 1000px;
             width: 90%;
             margin: auto;
+            /* Ensure content is above particles but below mobile sidebar */
             z-index: 10;
           }
+          
           .section-header {
             display: flex;
             align-items: center;
@@ -181,12 +238,14 @@ const Projects: React.FC = () => {
             margin-bottom: 50px;
             gap: 10px;
           }
+          
           .section-label {
             font-family: 'JetBrains Mono', monospace;
             font-weight: 400;
             font-size: clamp(14px, 5vw, 20px);
             color: var(--accent-primary);
           }
+          
           .section-heading {
             font-family: 'Josefin Sans', 'Inter', sans-serif;
             font-weight: 600;
@@ -194,10 +253,12 @@ const Projects: React.FC = () => {
             color: var(--text-primary);
             overflow: hidden;
           }
+          
           .animated-text span {
             display: inline-block;
             animation: textWave 2s ease-in-out infinite;
           }
+          
           .header-line {
             background: linear-gradient(90deg, var(--border-primary), transparent);
             width: 300px;
@@ -205,11 +266,13 @@ const Projects: React.FC = () => {
             margin-left: auto;
             opacity: 0.7;
           }
+          
           .projects-list {
             display: flex;
             flex-direction: column;
             gap: 50px;
           }
+          
           .project-card {
             position: relative;
             background: var(--secondary-bg);
@@ -218,12 +281,17 @@ const Projects: React.FC = () => {
             box-shadow: 0 10px 30px -15px rgba(0,0,0,0.3);
             cursor: pointer;
             transition: box-shadow 0.3s ease, transform 0.3s ease;
+            /* Ensure cards don't interfere with mobile sidebar */
+            z-index: 5;
           }
+          
           .project-card:hover {
             box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3);
             transform: translateY(-8px);
-            z-index: 10;
+            /* Hover state should still be below mobile sidebar */
+            z-index: 6;
           }
+          
           .project-label {
             font-family: 'JetBrains Mono', monospace;
             font-weight: 400;
@@ -231,6 +299,7 @@ const Projects: React.FC = () => {
             color: var(--accent-primary);
             margin-bottom: 8px;
           }
+          
           .project-title {
             font-family: 'Josefin Sans', 'Inter', sans-serif;
             font-weight: 600;
@@ -241,6 +310,7 @@ const Projects: React.FC = () => {
             gap: 10px;
             margin-bottom: 20px;
           }
+          
           .project-description {
             font-family: 'Inter', sans-serif;
             font-size: 16px;
@@ -251,11 +321,13 @@ const Projects: React.FC = () => {
             box-shadow: inset 0 0 15px rgba(59, 130, 246, 0.2);
             margin-bottom: 20px;
           }
+          
           .features-list {
             list-style: none;
             padding-left: 20px;
             margin: 0;
           }
+          
           .features-list li {
             font-family: 'Inter', sans-serif;
             font-size: 16px;
@@ -264,6 +336,7 @@ const Projects: React.FC = () => {
             margin-bottom: 14px;
             padding-left: 20px;
           }
+          
           .features-list li::before {
             content: '▹';
             position: absolute;
@@ -272,12 +345,14 @@ const Projects: React.FC = () => {
             font-size: 18px;
             line-height: 14px;
           }
+          
           .tech-stack {
             display: flex;
             flex-wrap: wrap;
             gap: 12px;
             margin-bottom: 20px;
           }
+          
           .tech-item {
             font-family: 'JetBrains Mono', monospace;
             font-size: 13px;
@@ -290,11 +365,13 @@ const Projects: React.FC = () => {
             user-select: none;
             cursor: default;
           }
+          
           .links {
             display: flex;
             gap: 15px;
             margin-top: 10px;
           }
+          
           .proj-link {
             font-family: 'JetBrains Mono', monospace;
             font-size: 13px;
@@ -308,11 +385,85 @@ const Projects: React.FC = () => {
             transition: all 0.25s ease;
             cursor: pointer;
           }
+          
           .proj-link:hover {
             background: var(--accent-primary);
             color: var(--primary-bg);
             transform: translate(-3px, -3px);
             box-shadow: 3px 3px 0 var(--accent-primary);
+          }
+
+          /* Responsive adjustments */
+          @media (max-width: 768px) {
+            .animated-background {
+              padding: 80px 20px;
+            }
+            
+            .projects-container {
+              width: 95%;
+            }
+            
+            .project-card {
+              padding: 25px 20px;
+            }
+            
+            .section-header {
+              margin-bottom: 40px;
+              flex-wrap: wrap;
+            }
+            
+            .header-line {
+              width: 150px;
+            }
+            
+            .projects-list {
+              gap: 40px;
+            }
+            
+            .project-description {
+              padding: 15px 20px;
+            }
+            
+            .features-list li {
+              font-size: 14px;
+            }
+            
+            .tech-item {
+              font-size: 12px;
+              padding: 4px 10px;
+            }
+          }
+          
+          @media (max-width: 480px) {
+            .animated-background {
+              padding: 60px 15px;
+            }
+            
+            .project-card {
+              padding: 20px 15px;
+            }
+            
+            .project-title {
+              font-size: 22px;
+            }
+            
+            .project-description {
+              padding: 15px;
+            }
+            
+            .features-list li {
+              font-size: 13px;
+            }
+            
+            .links {
+              flex-wrap: wrap;
+              gap: 10px;
+            }
+            
+            .proj-link {
+              padding: 6px 12px;
+              font-size: 12px;
+            }
           }
         `}
       </style>

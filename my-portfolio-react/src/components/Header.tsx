@@ -141,26 +141,37 @@ const Header: React.FC = () => {
                         font-size: clamp(10px, 1.2vw, 12px);
                     }
 
-                    .logo {
-                        color: var(--green);
-                        font-family: var(--font-mono);
-                        font-size: clamp(16px, 2.5vw, 20px);
-                        font-weight: 600;
-                        text-decoration: none;
-                        letter-spacing: -0.02em;
-                        position: relative;
-                        padding: clamp(8px, 1.5vw, 10px);
+                    .logo-container {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        padding: clamp(6px, 1.2vw, 8px);
                         border: 2px solid var(--green);
-                        border-radius: 4px;
+                        border-radius: 6px;
                         transition: var(--transition);
                         background: transparent;
                         cursor: pointer;
+                        position: relative;
+                        overflow: hidden;
                     }
 
-                    .logo:hover {
+                    .logo-container:hover {
                         background: rgba(59, 130, 246, 0.1);
                         transform: translateY(-2px);
                         box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.3);
+                        border-color: var(--green);
+                    }
+
+                    .logo-image {
+                        height: ${isScrolled ? 'clamp(32px, 4vw, 40px)' : 'clamp(36px, 4.5vw, 45px)'};
+                        width: auto;
+                        transition: var(--transition);
+                        object-fit: contain;
+                        filter: brightness(1) contrast(1.1);
+                    }
+
+                    .logo-container:hover .logo-image {
+                        filter: brightness(1.1) contrast(1.2);
                     }
 
                     .header-container {
@@ -235,6 +246,12 @@ const Header: React.FC = () => {
                         .header-container {
                             padding: ${isScrolled ? '12px 20px' : '15px 20px'};
                         }
+                        .logo-image {
+                            height: ${isScrolled ? '30px' : '34px'};
+                        }
+                        .logo-container {
+                            padding: 4px 6px;
+                        }
                     }
 
                     @media (min-width: 769px) {
@@ -252,6 +269,9 @@ const Header: React.FC = () => {
                             padding: 8px 12px;
                             font-size: 12px;
                         }
+                        .logo-image {
+                            height: ${isScrolled ? '36px' : '40px'};
+                        }
                     }
 
                     /* Large screens */
@@ -261,6 +281,9 @@ const Header: React.FC = () => {
                         }
                         .desktop-nav ol {
                             gap: 40px;
+                        }
+                        .logo-image {
+                            height: ${isScrolled ? '42px' : '48px'};
                         }
                     }
 
@@ -378,9 +401,12 @@ const Header: React.FC = () => {
 
                     /* Extra small mobile adjustments */
                     @media (max-width: 480px) {
-                        .logo {
-                            font-size: 16px;
-                            padding: 6px 8px;
+                        .logo-container {
+                            padding: 4px;
+                            border-radius: 50%;
+                        }
+                        .logo-image {
+                            height: ${isScrolled ? '28px' : '32px'};
                         }
                         .mobile-sidebar {
                             width: 85vw;
@@ -401,9 +427,11 @@ const Header: React.FC = () => {
                         .header-container {
                             padding: 8px 20px;
                         }
-                        .logo {
-                            font-size: 14px;
-                            padding: 6px;
+                        .logo-container {
+                            padding: 3px 4px;
+                        }
+                        .logo-image {
+                            height: ${isScrolled ? '24px' : '28px'};
                         }
                         .mobile-sidebar {
                             padding: 20px 10px;
@@ -420,14 +448,24 @@ const Header: React.FC = () => {
             <header className="header-container">
                 <div className="header-content fade-in-down">
                     <button
-                        className="logo"
+                        className="logo-container"
                         onClick={() => scrollToSection('about')}
-                        style={{
-                            fontSize: isScrolled ? '18px' : '20px',
-                            transition: 'var(--transition)'
-                        }}
+                        aria-label="Go to about section"
                     >
-                        MOHITH
+                        <img
+                            src="/images/my-logo.png"
+                            alt="Mohith Logo"
+                            className="logo-image"
+                            onError={(e) => {
+                                // Fallback in case image doesn't load
+                                const target = e.target as HTMLImageElement;
+                                target.style.display = 'none';
+                                const fallback = document.createElement('span');
+                                fallback.textContent = 'MOHITH';
+                                fallback.style.cssText = 'color: var(--green); font-family: var(--font-mono); font-weight: 600; font-size: 18px;';
+                                target.parentNode?.appendChild(fallback);
+                            }}
+                        />
                     </button>
 
                     {/* Mobile Hamburger */}

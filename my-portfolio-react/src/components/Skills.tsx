@@ -108,7 +108,7 @@ const Skills: React.FC = () => {
         }
 
         section.skills-section {
-          padding: 120px 0;
+          padding: 120px 20px;
           min-height: 100vh;
           display: flex;
           align-items: center;
@@ -128,6 +128,7 @@ const Skills: React.FC = () => {
           -webkit-backdrop-filter: blur(14px);
           position: relative;
           width: 100%;
+          box-sizing: border-box;
         }
 
         .section-header {
@@ -166,12 +167,6 @@ const Skills: React.FC = () => {
           background: linear-gradient(90deg, var(--accent-primary), transparent);
           position: relative;
           top: 2px;
-        }
-
-        @media (max-width: 768px) {
-          .header-line {
-            width: 100px;
-          }
         }
 
         .skills-grid {
@@ -272,6 +267,233 @@ const Skills: React.FC = () => {
           font-size: 18px;
           line-height: 1.6;
           font-weight: 400;
+        }
+
+        /* Responsive Styles */
+        
+        /* Large tablets and small desktops */
+        @media (max-width: 992px) {
+          .skills-grid {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+          }
+          
+          .container-glass {
+            padding: 40px 32px;
+          }
+          
+          .section-heading {
+            font-size: 32px;
+          }
+          
+          .header-line {
+            width: 200px;
+          }
+        }
+
+        /* Tablets */
+        @media (max-width: 768px) {
+          section.skills-section {
+            padding: 80px 16px;
+          }
+          
+          .container-glass {
+            padding: 36px 24px;
+            border-radius: 20px;
+          }
+          
+          .section-header {
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            white-space: normal;
+          }
+          
+          .section-label {
+            font-size: 18px;
+            margin-right: 10px;
+          }
+          
+          .section-heading {
+            font-size: 28px;
+            margin: 0 12px 0 0;
+          }
+          
+          .header-line {
+            width: 120px;
+            flex-grow: 1;
+            min-width: 60px;
+          }
+          
+          .skills-grid {
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+          }
+          
+          .skills-card {
+            padding: 24px 20px;
+            border-radius: 16px;
+          }
+          
+          .category-title {
+            font-size: 20px;
+          }
+          
+          .additional-note {
+            margin-top: 40px;
+            font-size: 16px;
+            padding: 0 12px;
+          }
+        }
+
+        /* Mobile devices */
+        @media (max-width: 640px) {
+          section.skills-section {
+            padding: 60px 12px;
+            min-height: auto;
+          }
+          
+          .container-glass {
+            padding: 28px 20px;
+            border-radius: 16px;
+          }
+          
+          .section-header {
+            margin-bottom: 32px;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+          }
+          
+          .section-label {
+            font-size: 16px;
+            margin-right: 0;
+          }
+          
+          .section-heading {
+            font-size: 24px;
+            margin: 0;
+            line-height: 1.1;
+          }
+          
+          .header-line {
+            width: 100%;
+            max-width: 200px;
+            align-self: stretch;
+          }
+          
+          .skills-grid {
+            grid-template-columns: 1fr;
+            gap: 16px;
+          }
+          
+          .skills-card {
+            padding: 20px 16px;
+            border-radius: 12px;
+          }
+          
+          .skills-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 2px 2px 0 0 var(--accent-primary);
+          }
+          
+          .card-header {
+            gap: 10px;
+            margin-bottom: 16px;
+          }
+          
+          .category-icon {
+            width: 24px;
+            height: 24px;
+          }
+          
+          .category-title {
+            font-size: 18px;
+          }
+          
+          .skills-list {
+            grid-template-columns: 1fr;
+            gap: 6px 12px;
+          }
+          
+          .skill-item {
+            font-size: 13px;
+            gap: 6px;
+            margin-bottom: 8px;
+          }
+          
+          .skill-logo {
+            width: 18px;
+            height: 18px;
+          }
+          
+          .additional-note {
+            margin-top: 32px;
+            font-size: 14px;
+            padding: 0 8px;
+          }
+        }
+
+        /* Small mobile devices */
+        @media (max-width: 480px) {
+          section.skills-section {
+            padding: 40px 8px;
+          }
+          
+          .container-glass {
+            padding: 24px 16px;
+          }
+          
+          .section-heading {
+            font-size: 22px;
+          }
+          
+          .skills-card {
+            padding: 16px 12px;
+          }
+          
+          .category-title {
+            font-size: 16px;
+          }
+          
+          .skill-item {
+            font-size: 12px;
+          }
+          
+          .additional-note {
+            font-size: 13px;
+            margin-top: 24px;
+          }
+        }
+
+        /* Very small screens */
+        @media (max-width: 360px) {
+          .section-label {
+            font-size: 14px;
+            letter-spacing: 1px;
+          }
+          
+          .section-heading {
+            font-size: 20px;
+          }
+          
+          .skills-list {
+            gap: 4px 8px;
+          }
+          
+          .skill-item {
+            font-size: 11px;
+            gap: 4px;
+          }
+          
+          .skill-logo {
+            width: 16px;
+            height: 16px;
+          }
+          
+          .category-icon {
+            width: 20px;
+            height: 20px;
+          }
         }
       `}</style>
 

@@ -45,7 +45,7 @@ const Education = () => {
       grade: '96.83',
       type: 'completed',
       description: 'Completed pre-university education with exceptional performance in Science stream.',
-      highlights: ['Physics', 'Chemistry', 'Mathematics', 'Computer Science'],
+      highlights: ['Physics', 'Chemistry', 'Mathematics', 'Biology'],
     },
     {
       institution: 'Rotary High School',
